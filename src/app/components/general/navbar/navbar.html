@@ -1,0 +1,42 @@
+<nav class="navbar" [class.open]="menuOpen">
+    <div class="container">
+        <a href="/" class="logo" title="Mini">
+            <img src="https://cdn-icons-png.flaticon.com/128/15407/15407208.png" alt="Mini Logo" />
+            <span>MiniMarket</span>
+        </a>
+
+        <button class="menu-btn" aria-label="Toggle menu" (click)="toggleMenu()" [attr.aria-expanded]="menuOpen">
+            <svg class="icon" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                stroke-linejoin="round" viewBox="0 0 24 24">
+                <path class="line1" d="M4 7h16"></path>
+                <path class="line2" d="M4 12h16"></path>
+                <path class="line3" d="M4 17h16"></path>
+            </svg>
+        </button>
+
+        <div class="menu" [class.open]="menuOpen">
+
+
+            <a routerLink="/home" routerLinkActive="active" (click)="closeMenu()" class="nav-link">Inicio</a>
+
+            <a routerLink="/nosotros" routerLinkActive="active" (click)="closeMenu()" class="nav-link">Nosotros</a>
+
+            <a routerLink="/listaProductos" routerLinkActive="active" (click)="closeMenu()" class="nav-link">Revisar
+                productos</a>
+
+            <a routerLink="/registroProductos" >
+                <button
+                    class="flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded-lg transition-transform duration-300 ease-in-out transform hover:bg-red-800 hover:scale-105"
+                    aria-label="Registrar Productos">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2h4a2 2 0 012 2v1" />
+                    </svg>
+                    <span class="text-base font-medium">Registrar Productos</span>
+                </button>
+            </a>
+
+        </div>
+    </div>
+</nav>

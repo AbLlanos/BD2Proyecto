@@ -1,0 +1,175 @@
+.contenedor {
+    padding: 30px;
+    background-color: #e6f0fa;
+    /* azul muy claro */
+}
+
+.img {
+    width: 100%;
+    height: 500px;
+    object-fit: contain;
+    border-radius: 20px;
+}
+
+.tarjeta {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 10px;
+    background-color: #cce4f6;
+    /* azul pastel */
+    padding: 15px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 30px;
+    background-color: #a3d2f0;
+    /* azul medio */
+}
+
+.card-hover:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 20px rgba(0, 60, 120, 0.3);
+}
+
+.titulo {
+    font-size: 50px;
+    color: #1e3a8a;
+    /* azul marino */
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+input:hover,
+select:hover,
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 60, 120, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.caja {
+    background-color: #dceeff;
+    /* azul clarito */
+    border-radius: 20px;
+    padding: 10px;
+    margin-bottom: 15px;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+    box-shadow: 0 8px 16px rgba(0, 60, 120, 0.2);
+}
+
+.card-producto {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    background: #ffffff;
+    z-index: 0;
+}
+
+.card-producto::before {
+    content: '';
+    position: absolute;
+    width: 300%;
+    height: 300%;
+    top: -100%;
+    left: -100%;
+    background-image: linear-gradient(180deg, #60a5fa, #1e40af);
+    /* azul claro a azul oscuro */
+    animation: rotCardBorder 2s linear infinite;
+    z-index: 0;
+}
+
+.card-producto::after {
+    content: '';
+    position: absolute;
+    inset: 5px;
+    background: #ffffff;
+    border-radius: 15px;
+    z-index: 1;
+}
+
+@keyframes rotCardBorder {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Para mantener contenido arriba del after */
+.card-producto>* {
+    position: relative;
+    z-index: 2;
+}
+
+/* Botón */
+.codepen-button {
+    display: block;
+    cursor: pointer;
+    color: white;
+    margin: 0 auto;
+    position: relative;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 6px;
+    overflow: hidden;
+    padding: 3px;
+    isolation: isolate;
+}
+
+.codepen-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 400%;
+    height: 100%;
+    background: linear-gradient(115deg,
+            #3b82f6,
+            #60a5fa,
+            #2563eb,
+            #1e40af,
+            #0ea5e9);
+    background-size: 25% 100%;
+    animation: animated-border 0.75s linear infinite;
+    animation-play-state: paused;
+    translate: -5% 0%;
+    transition: translate 0.25s ease-out;
+}
+
+.codepen-button:hover::before {
+    animation-play-state: running;
+    transition-duration: 0.75s;
+    translate: 0% 0%;
+}
+
+@keyframes animated-border {
+    to {
+        transform: translateX(-25%);
+    }
+}
+
+.codepen-button span {
+    position: relative;
+    display: block;
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    background: #2563eb;
+    border-radius: 10px;
+    height: 100%;
+}
+
+.pointer-events-none {
+    pointer-events: none;
+}
+
+.opacity-50 {
+    opacity: 0.5;
+}
