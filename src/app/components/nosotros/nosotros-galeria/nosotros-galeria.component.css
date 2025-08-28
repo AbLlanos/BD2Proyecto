@@ -1,0 +1,42 @@
+/* Animación de entrada para imágenes (desde abajo) */
+@keyframes slideInFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estilo de las imágenes en la galería */
+.gallery-img {
+  animation: slideInFromBottom 1s ease-out forwards;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, filter 0.3s ease-in-out;
+}
+
+.gallery-img:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.gallery-img:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.gallery-img:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+/* Efecto de hover */
+.gallery-img:hover {
+  transform: scale(1.1) rotate(5deg); /* Escalar y rotar ligeramente */
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2); /* Aumentar sombra */
+  filter: brightness(1.2); /* Aumentar brillo para resaltar */
+  cursor: pointer; /* Cambiar el cursor a mano */
+}
+
+/* Opcional: efecto de desplazamiento (agregar desplazamiento lateral al pasar el ratón) */
+.gallery-img:hover {
+  transform: scale(1.1) translateY(-10px) rotate(5deg); /* Desplazamiento hacia arriba al pasar el ratón */
+}

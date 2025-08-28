@@ -1,0 +1,63 @@
+/* Animación de entrada desde los lados */
+@keyframes slideInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Estilo para los miembros del equipo */
+.team-member {
+  animation: slideInFromLeft 1s ease-out forwards; /* Aparece desde la izquierda por defecto */
+}
+
+/* Para las imágenes, las animaciones se añaden de forma escalonada */
+.team-member:nth-child(2) {
+  animation: slideInFromRight 1s ease-out forwards;
+  animation-delay: 0.2s;
+}
+
+.team-member:nth-child(3) {
+  animation: slideInFromLeft 1s ease-out forwards;
+  animation-delay: 0.4s;
+}
+
+/* Efectos de hover para las imágenes */
+.team-img {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Cuando se pasa el ratón */
+.team-img:hover {
+  transform: scale(1.1); /* Aumentar el tamaño */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1); /* Agregar sombra */
+  cursor: pointer; /* Cambiar el cursor */
+}
+
+/* Estilo adicional para las tarjetas del equipo */
+.team-member h3, .team-member p {
+  transition: transform 0.3s ease;
+}
+
+.team-member:hover h3 {
+  transform: translateY(-5px); /* Mover el título hacia arriba al hacer hover */
+}
+
+.team-member:hover p {
+  transform: translateY(-3px); /* Mover la descripción hacia arriba */
+}

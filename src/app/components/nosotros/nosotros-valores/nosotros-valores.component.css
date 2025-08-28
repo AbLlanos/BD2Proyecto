@@ -1,0 +1,16 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
+
+section {
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+section li:hover {
+  transform: translateX(8px);
+  transition: transform 0.3s ease;
+  color: #000309; /* Azul más fuerte para hover */
+}
+
+section li span {
+  font-size: 1.25rem;
+}

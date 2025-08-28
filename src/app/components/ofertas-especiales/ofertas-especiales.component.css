@@ -1,0 +1,74 @@
+/* Oferta Section */
+.ofertas-section {
+  padding: 4rem 1.5rem;
+}
+
+.oferta-card {
+  background-color:rgba(2, 136, 209, 0.5); /* Blanco con opacidad para que no sea tan duro */
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+
+.oferta-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Product Image */
+.oferta-card img {
+  border-radius: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.oferta-card img:hover {
+  transform: scale(1.05);
+}
+
+/* Product Text */
+.oferta-card p {
+  margin-bottom: 0.5rem;
+}
+
+.oferta-card .text-red-500 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.oferta-card .text-gray-600 {
+  font-size: 1rem;
+}
+
+/* Link */
+.oferta-card a {
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.oferta-card a:hover {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+/* Responsive Grid */
+@media (min-width: 640px) {
+  .ofertas-section .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .ofertas-section .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .ofertas-section .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
