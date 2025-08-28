@@ -1,0 +1,31 @@
+/* Animación de entrada de texto */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
+
+/* Fondo con gradiente y efectos */
+section {
+  background-image: linear-gradient(135deg, #3b82f6, #60a5fa);
+  border-radius: 10px;
+}
+
+/* Animación para que el título y texto se deslicen desde abajo */
+.animate__fadeIn {
+  animation: fadeIn 2s ease-out forwards;
+}
+
+/* Agregar el movimiento de las letras */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Efecto de escala en el botón */
+.bg-white:hover {
+  transform: scale(1.1);
+  transition: all 0.3s ease;
+}

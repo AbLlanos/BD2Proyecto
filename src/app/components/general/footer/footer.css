@@ -1,0 +1,33 @@
+/* Estilo del footer */
+footer {
+    background-color: rgba(2, 136, 209, 0.5);
+    /* Fondo azul translúcido */
+}
+
+/* Para los enlaces */
+footer a {
+    color: white;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: rgba(2, 136, 209, 0.5);
+    /* Cambia el color de los enlaces al pasar el ratón */
+}
+
+/* Para las secciones del footer */
+footer .container {
+    color: white;
+    /* Color blanco para el texto */
+}
+
+footer .container h4 {
+    color: #ffffff;
+    /* Títulos de las secciones en blanco */
+}
+
+/* Para el footer base */
+footer .bg-blue-700 {
+    background-color: rgba(0, 96, 147, 0.5);
+    /* Fondo azul oscuro translúcido para la parte inferior */
+}

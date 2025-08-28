@@ -1,0 +1,12 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
+
+/* Sombra suave para las cajas de misión y visión */
+section div {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efecto hover para resaltar */
+section div:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 20px rgba(59, 130, 246, 0.4);
+}
