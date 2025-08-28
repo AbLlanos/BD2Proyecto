@@ -1,1 +1,53 @@
-<p>formulario-registro-proveedor works!</p>
+<app-navbar></app-navbar>
+
+<div class="container1 w-full min-h-screen flex items-center justify-center bg-blue-50 px-4 py-24">
+
+  <div class="w-full max-w-4xl bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row">
+
+    <!-- Imagen lateral -->
+    <div class="w-full md:w-1/2 h-64 md:h-auto">
+      <img src="https://images.pexels.com/photos/31844195/pexels-photo-31844195.jpeg"
+        alt="Imagen proveedor"
+        class="w-full h-full object-cover object-center">
+    </div>
+
+    <!-- Formulario -->
+    <div class="w-full md:w-1/2 p-8 flex flex-col justify-center space-y-6">
+
+      <div class="bg-blue-100 p-6 rounded-xl shadow-lg">
+
+        <div class="text-center mb-6">
+          <h1 class="text-4xl font-bold text-blue-700">Registrar Proveedor</h1>
+          <p class="text-blue-600 mt-2">Ingrese los datos del proveedor para guardarlo en el sistema</p>
+
+          <div class="mt-6 flex justify-center">
+            <img src="https://cdn-icons-png.flaticon.com/128/15407/15407208.png"
+              alt="Logo"
+              class="w-30 h-24">
+          </div>
+        </div>
+
+        <!-- FORMULARIO PROVEEDOR -->
+        <form [formGroup]="proveedorForm" (ngSubmit)="guardarProveedor()" class="space-y-4">
+
+          <!-- Nombre -->
+          <div>
+            <label class="block text-sm font-medium text-blue-700">Nombre del Proveedor</label>
+            <input type="text" formControlName="nombre" placeholder="Ej. Distribuidora Central"
+              class="w-full px-4 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
+            @if (proveedorForm.get('nombre')?.invalid && proveedorForm.get('nombre')?.touched) {
+              <span class="text-red-500 text-sm">El nombre es obligatorio</span>
+            }
+          </div>
+
+          <!-- Botón -->
+          <button type="submit"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-transform transform hover:scale-105">
+            Guardar Proveedor
+          </button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
