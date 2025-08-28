@@ -6,7 +6,7 @@ import { Producto } from '../components/products/lista-productos/productos';
 @Injectable({
   providedIn: 'root'
 })
-export class Productos {
+export class ProductosServices {
 
   private API_PRODUCTOS = "http://localhost:8080/productos";
 
@@ -14,27 +14,27 @@ export class Productos {
 
   // Mostrar todos los productos
   leerProductos(): Observable<Producto[]> {
-    return this.http.get<Producto[]>(this.API_PRODUCTOS, { withCredentials: true });
+    return this.http.get<Producto[]>(this.API_PRODUCTOS, { withCredentials: false });
   }
 
   // Guardar producto
   guardarProducto(producto: Producto): Observable<Producto> {
-    return this.http.post<Producto>(`${this.API_PRODUCTOS}/guardarProducto`, producto, { withCredentials: true });
+    return this.http.post<Producto>(`${this.API_PRODUCTOS}/guardar`, producto, { withCredentials: false });
   }
 
   // Buscar por ID
   buscarProductobyId(id: string): Observable<Producto> {
-    return this.http.get<Producto>(`${this.API_PRODUCTOS}/${id}`, { withCredentials: true });
+    return this.http.get<Producto>(`${this.API_PRODUCTOS}/${id}`, { withCredentials: false });
   }
 
   // Eliminar producto
   eliminarProducto(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.API_PRODUCTOS}/eliminar/${id}`, { withCredentials: true });
+    return this.http.delete<void>(`${this.API_PRODUCTOS}/eliminar/${id}`, { withCredentials: false });
   }
 
   // Editar producto
   editarProducto(id: string, producto: Producto): Observable<Producto> {
-    return this.http.put<Producto>(`${this.API_PRODUCTOS}/actualizar/${id}`, producto, { withCredentials: true });
+    return this.http.put<Producto>(`${this.API_PRODUCTOS}/actualizar/${id}`, producto, { withCredentials: false });
   }
 
 }

@@ -4,7 +4,7 @@ export interface Producto {
     precio: number;
     cantidad: number;
     iva: number;
-    id_categoria: number;
-    id_proveedor: number;
+    categoria?: { id_categoria: number; nombre: string };
+    proveedor?: { id_proveedor: number; nombre: string };
     imgUrl: string;
 }

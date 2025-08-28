@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
 import { Navbar } from "../../general/navbar/navbar";
-import { HttpClient } from '@angular/common/http';
 import { Producto } from './productos';
+import { ProductosServices } from '../../../services/productos';
+import { Categoria } from '../../categoria/formulario-registro-categoria/categoria';
+import { Proveedor } from '../../proveedor/formulario-registro-proveedor/proveedor';
+import { categoriaService } from '../../../services/categoria';
+import { proveedorService } from '../../../services/proveedor';
+
 
 @Component({
   selector: 'app-lista-productos',
@@ -11,43 +16,49 @@ import { Producto } from './productos';
 })
 export class ListaProductos {
 
-
   productos: Producto[] = [];
+  categorias: Categoria[] = [];
+  proveedores: Proveedor[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private productoService: ProductosServices,
+    private categoriaService: categoriaService,
+    private proveedorService: proveedorService
+  ) { }
 
   ngOnInit(): void {
-    // Datos de ejemplo para ver cómo se ve la galería
-    this.productos = [
-      {
-        id_producto: 1,
-        nombre: 'Coca Cola 500ml',
-        precio: 1.50,
-        cantidad: 10,
-        iva: 0.12,
-        id_categoria: 1,
-        id_proveedor: 1,
-        imgUrl: 'https://www.pharmacys.com.ec/wcsstore/DF_CatalogAsset/images/catalog/producto/fullimage/74762P-1.jpg'
-      },
-      {
-        id_producto: 2,
-        nombre: 'Papas Fritas',
-        precio: 2.00,
-        cantidad: 5,
-        iva: 0.12,
-        id_categoria: 2,
-        id_proveedor: 2,
-        imgUrl: 'https://www.supermaxi.com/wp-content/uploads/2021/06/7861042557296-1-2.jpg.webp'
-      }
-    ];
-    /*
-      ngOnInit(): void {
-        this.http.get<Producto[]>('assets/productos.json').subscribe(data => {
-          this.productos = data;
-          console.log(this.productos);
-        });
-      }
-    */
+    this.cargarCategorias();
+    this.cargarProveedores();
+    this.cargarProductos();
+  }
+
+  cargarCategorias() {
+    this.categoriaService.leerCategoria().subscribe({
+      next: data => this.categorias = data,
+      error: err => console.error('Error al cargar categorías:', err)
+    });
+  }
+
+  cargarProveedores() {
+    this.proveedorService.leerProveedor().subscribe({
+      next: data => this.proveedores = data,
+      error: err => console.error('Error al cargar proveedores:', err)
+    });
+  }
+
+  cargarProductos() {
+    this.productoService.leerProductos().subscribe({
+      next: data => this.productos = data,
+      error: err => console.error('Error al cargar productos:', err)
+    });
+  }
+
+  getNombreCategoria(producto: Producto): string {
+    return producto.categoria ? producto.categoria.nombre : 'Sin categoría';
+  }
+
+  getNombreProveedor(producto: Producto): string {
+    return producto.proveedor ? producto.proveedor.nombre : 'Sin proveedor';
   }
 
   comprar(producto: Producto): void {

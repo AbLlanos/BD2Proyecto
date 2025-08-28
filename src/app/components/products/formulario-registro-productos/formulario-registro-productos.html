@@ -28,7 +28,7 @@
                     <!-- Nombre -->
                     <div>
                         <label class="block text-sm font-medium text-blue-700">Nombre</label>
-                        <input type="text" formControlName="nombre"
+                        <input type="text" formControlName="nombre" placeholder="Nombre del producto"
                             class="w-full px-4 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
                         @if (productoForm.get('nombre')?.invalid && productoForm.get('nombre')?.touched) {
                         <span class="text-red-500 text-sm">El nombre es obligatorio</span>
@@ -56,15 +56,25 @@
                             class="w-full px-4 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
                     </div>
 
+                    <!-- IMG -->
+                    <label class="block text-sm font-medium text-blue-700">
+                        Ingrese el URL de la imagen del producto
+                    </label>
+                    <input type="text" formControlName="imgUrl" placeholder="imagen"
+                        class="w-full px-4 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                    @if (productoForm.get('imgUrl')?.invalid && productoForm.get('imgUrl')?.touched) {
+                    <span class="text-red-500 text-sm">La imagen es obligatoria</span>
+                    }
+
                     <!-- Categoría -->
                     <div>
                         <label class="block text-sm font-medium text-blue-700">Categoría</label>
                         <select formControlName="id_categoria"
                             class="w-full px-4 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
                             <option value="">Seleccione una categoría</option>
-                            <option value="1">Bebidas</option>
-                            <option value="2">Snacks</option>
-                            <option value="3">Aseo</option>
+                            @for (cat of categorias; track cat.id_categoria) {
+                            <option [value]="cat.id_categoria">{{ cat.nombre }}</option>
+                            }
                         </select>
                     </div>
 
@@ -74,8 +84,9 @@
                         <select formControlName="id_proveedor"
                             class="w-full px-4 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
                             <option value="">Seleccione un proveedor</option>
-                            <option value="1">Proveedor A</option>
-                            <option value="2">Proveedor B</option>
+                            @for (prov of proveedores; track prov.id_proveedor) {
+                            <option [value]="prov.id_proveedor">{{ prov.nombre }}</option>
+                            }
                         </select>
                     </div>
 

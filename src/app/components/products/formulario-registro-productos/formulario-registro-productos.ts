@@ -3,29 +3,45 @@ import { Navbar } from "../../general/navbar/navbar";
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Productos } from '../../../services/productos';
+import { ProductosServices } from '../../../services/productos';
+import { categoriaService } from '../../../services/categoria';
+import { proveedorService } from '../../../services/proveedor';
+import { Categoria } from '../../categoria/formulario-registro-categoria/categoria';
+import { Proveedor } from '../../proveedor/formulario-registro-proveedor/proveedor';
 
 @Component({
   selector: 'app-formulario-registro-productos',
-  imports: [Navbar, CommonModule, FormsModule, ReactiveFormsModule,],
+  imports: [Navbar, CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './formulario-registro-productos.html',
   styleUrl: './formulario-registro-productos.css'
 })
 export class FormularioRegistroProductos {
 
   productoForm!: FormGroup;
+  categorias: Categoria[] = [];
+  proveedores: Proveedor[] = [];
 
-  constructor(private fb: FormBuilder, private productoService: Productos, private router: Router) { }
+  constructor(
+    private fb: FormBuilder,
+    private productoService: ProductosServices,
+    private categoriaService: categoriaService,
+    private proveedorService: proveedorService,
+    private router: Router
+  ) {}
 
-  ngOnInit(): void {
+ ngOnInit(): void {
     this.productoForm = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(3)]],
       precio: [0, [Validators.required, Validators.min(0.01)]],
       cantidad: [0, [Validators.required, Validators.min(0)]],
       iva: [0.15, [Validators.required, Validators.min(0), Validators.max(1)]],
+      imgUrl: ['', [Validators.required]],
       id_categoria: ['', Validators.required],
       id_proveedor: ['', Validators.required]
     });
+
+    this.categoriaService.leerCategoria().subscribe(data => this.categorias = data);
+    this.proveedorService.leerProveedor().subscribe(data => this.proveedores = data);
   }
 
   agregarProducto() {
@@ -34,7 +50,18 @@ export class FormularioRegistroProductos {
       return;
     }
 
-    this.productoService.guardarProducto(this.productoForm.value).subscribe(() => {
+    const formValue = this.productoForm.value;
+
+    const productoAGuardar = {
+      ...formValue,
+      categoria: { id_categoria: formValue.id_categoria },
+      proveedor: { id_proveedor: formValue.id_proveedor }
+    };
+
+    delete productoAGuardar.id_categoria;
+    delete productoAGuardar.id_proveedor;
+
+    this.productoService.guardarProducto(productoAGuardar).subscribe(() => {
       alert('Producto registrado correctamente');
       this.router.navigate(['/listaProductos']);
     });
