@@ -1,0 +1,118 @@
+:host {
+  display: block;
+  padding: 2rem;
+  background: #f9f9f9;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Hero */
+app-hero-registro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, rgba(2, 136, 209, 0.5), rgba(173, 216, 230, 0.5));
+  color: white;
+  padding: 3rem 1rem;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+app-hero-registro:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+}
+
+/* Títulos */
+.registro-titles {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin-top: 2rem;
+}
+
+.registro-titles h2 {
+  cursor: pointer;
+  font-size: 1.8rem;
+  color: rgba(2, 136, 209, 0.9);
+  position: relative;
+  padding-bottom: 4px;
+  transition: color 0.3s;
+}
+
+.registro-titles h2.active {
+  color: rgba(173, 216, 230, 1);
+}
+
+.registro-titles h2::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 4px;
+  background-color: rgba(173, 216, 230, 0.8);
+  transition: width 0.5s ease;
+}
+
+.registro-titles h2.active::after {
+  width: 100%;
+}
+
+/* Contenedor centrado */
+.form-center-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3rem;
+  gap: 2rem;
+}
+
+/* Formulario wrapper */
+.form-wrapper {
+  width: 100%;
+  max-width: 600px;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  height: 0;
+  overflow: hidden;
+}
+
+.form-wrapper.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+  height: auto;
+}
+
+/* Formularios */
+app-registro-empleado,
+app-registro-cliente {
+  width: 100%;
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+app-registro-empleado:hover,
+app-registro-cliente:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .registro-titles {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .form-wrapper {
+    max-width: 90%;
+  }
+}

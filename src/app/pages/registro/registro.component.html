@@ -1,0 +1,21 @@
+<br><br><br>
+<app-hero-registro></app-hero-registro>
+
+<section class="registro">
+  <!-- Títulos -->
+  <div class="registro-titles">
+    <h2 (click)="toggleForm('empleado')" [class.active]="showEmpleado">Registro Empleado</h2>
+    <h2 (click)="toggleForm('cliente')" [class.active]="showCliente">Registro Cliente</h2>
+  </div>
+
+  <!-- Formulario centrado -->
+  <div class="form-center-container">
+    <div *ngIf="showEmpleado" class="form-wrapper show">
+      <app-registro-empleado></app-registro-empleado>
+    </div>
+
+    <div *ngIf="showCliente" class="form-wrapper show">
+      <app-registro-cliente></app-registro-cliente>
+    </div>
+  </div>
+</section>

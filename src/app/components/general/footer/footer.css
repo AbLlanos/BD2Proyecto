@@ -1,33 +1,18 @@
-/* Estilo del footer */
 footer {
-    background-color: rgba(2, 136, 209, 0.5);
-    /* Fondo azul translúcido */
+  background: rgba(2, 136, 209, 0.5);
+  color: white;
 }
 
-/* Para los enlaces */
 footer a {
-    color: white;
-    transition: color 0.3s ease;
+  color: white;
+  transition: color 0.3s ease;
 }
 
 footer a:hover {
-    color: rgba(2, 136, 209, 0.5);
-    /* Cambia el color de los enlaces al pasar el ratón */
+  color: rgba(173, 216, 230, 0.9);
 }
 
-/* Para las secciones del footer */
-footer .container {
-    color: white;
-    /* Color blanco para el texto */
-}
-
-footer .container h4 {
-    color: #ffffff;
-    /* Títulos de las secciones en blanco */
-}
-
-/* Para el footer base */
 footer .bg-blue-700 {
-    background-color: rgba(0, 96, 147, 0.5);
-    /* Fondo azul oscuro translúcido para la parte inferior */
+  background: rgba(0, 96, 147, 0.7);
+  color: white;
 }
