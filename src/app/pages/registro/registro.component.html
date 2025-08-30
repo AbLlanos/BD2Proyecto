@@ -1,20 +1,35 @@
-<br><br><br>
-<app-hero-registro></app-hero-registro>
-
-<section class="registro">
-  <!-- Títulos -->
-  <div class="registro-titles">
-    <h2 (click)="toggleForm('empleado')" [class.active]="showEmpleado">Registro Empleado</h2>
-    <h2 (click)="toggleForm('cliente')" [class.active]="showCliente">Registro Cliente</h2>
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>Bienvenido al Registro</h1>
+    <p>Selecciona si deseas registrarte como empleado o cliente.</p>
   </div>
+  
+  <!-- Imagen hero -->
+  <div class="hero-img">
+    <img src="https://i.imgur.com/ZaJtbaj.jpeg" alt="Registro">
+  </div>
+</section>
 
-  <!-- Formulario centrado -->
+<!-- Registro -->
+<section class="registro">
+  <!-- Títulos (pestañas) -->
+  <div class="registro-titles">
+    <h2 (click)="toggleForm('empleado')" [class.active]="showEmpleado">
+      <span>Registro Empleado</span>
+    </h2>
+    <h2 (click)="toggleForm('cliente')" [class.active]="showCliente">
+      <span>Registro Cliente</span>
+    </h2>
+  </div>
+  
+  <!-- Contenedor dinámico -->
   <div class="form-center-container">
-    <div *ngIf="showEmpleado" class="form-wrapper show">
+    <div *ngIf="showEmpleado" class="form-wrapper fadeIn">
       <app-registro-empleado></app-registro-empleado>
     </div>
-
-    <div *ngIf="showCliente" class="form-wrapper show">
+    
+    <div *ngIf="showCliente" class="form-wrapper fadeIn">
       <app-registro-cliente></app-registro-cliente>
     </div>
   </div>

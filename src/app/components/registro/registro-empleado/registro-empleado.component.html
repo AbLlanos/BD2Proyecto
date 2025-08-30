@@ -1,29 +1,36 @@
-<form class="registro-empleado-form">
-  <h3>Registro de Empleado</h3>
-
-  <label for="nombre">Nombre:</label>
-  <input type="text" id="nombre" placeholder="Nombre del empleado" />
-
-  <label for="apellido">Apellido:</label>
-  <input type="text" id="apellido" placeholder="Apellido del empleado" />
-
-  <label for="cargo">Cargo:</label>
-  <input type="text" id="cargo" placeholder="Cargo del empleado" />
-
-  <label for="salario">Salario:</label>
-  <input type="number" id="salario" placeholder="Salario" />
-
-  <label for="usuario">Usuario:</label>
-  <input type="text" id="usuario" placeholder="Nombre de usuario" />
-
-  <label for="password">Contraseña:</label>
-  <input type="password" id="password" placeholder="Contraseña" />
-
-  <label for="rol">Rol:</label>
-  <select id="rol">
-    <option value="empleado">Empleado</option>
-    <option value="admin">Administrador</option>
-  </select>
-
-  <button type="submit">Registrar Empleado</button>
+<form class="registro-proveedor-form">
+    <h3>Registro Empleado</h3>
+    
+    <div class="input-card">
+        <input type="text" id="nombre" placeholder="Nombre del empleado" class="input-inner" />
+    </div>
+    
+    <div class="input-card">
+        <input type="text" id="apellido" placeholder="Apellido del empleado" class="input-inner" />
+    </div>
+    
+    <div class="input-card">
+        <input type="text" id="cargo" placeholder="Cargo del empleado" class="input-inner" />
+    </div>
+    
+    <div class="input-card">
+        <input type="number" id="salario" placeholder="Salario" class="input-inner" />
+    </div>
+    
+    <div class="input-card">
+        <input type="text" id="usuario" placeholder="Nombre de usuario" class="input-inner" />
+    </div>
+    
+    <div class="input-card">
+        <input type="password" id="password" placeholder="Contraseña" class="input-inner" />
+    </div>
+    
+    <div class="input-card">
+        <select id="rol" class="input-inner">
+            <option value="empleado">Empleado</option>
+            <option value="admin">Administrador</option>
+        </select>
+    </div>
+    
+    <button type="submit">Registrar Empleado</button>
 </form>

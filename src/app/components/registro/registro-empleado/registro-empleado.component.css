@@ -1,76 +1,106 @@
-.registro-empleado-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  background-color: rgba(2, 136, 209, 0.8); /* azul oscuro */
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(2, 136, 209, 0.3);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* === INPUT / TEXTAREA CON BORDE ANIMADO ESTILO CARD === */
+.input-card {
+    position: relative;
+    border-radius: 12px;
+    padding: 4px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    z-index: 0;
+    background: transparent;
 }
 
-.registro-empleado-form:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(2, 136, 209, 0.4);
+.input-card::before {
+    content: '';
+    position: absolute;
+    width: 300%;
+    height: 300%;
+    top: -100%;
+    left: -100%;
+    background-image: linear-gradient(10deg, rgba(2, 136, 209, 0.9), rgba(101, 181, 224, 0.9));
+    animation: rotateInputBorder 4s linear infinite;
+    z-index: 0;
+    transition: all 0.1s ease;
 }
 
-.registro-empleado-form h3 {
-  text-align: center;
-  color: #ffffff; /* letras blancas */
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
+.input-card::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    background: rgba(211, 226, 234, 0.9);
+    border-radius: 10px;
+    z-index: 1;
 }
 
-.registro-empleado-form label {
-  font-weight: 500;
-  color: #ffffff; /* letras blancas */
+/* Contenido interno siempre encima del efecto */
+.input-card > * {
+    position: relative;
+    z-index: 2;
 }
 
-.registro-empleado-form input,
-.registro-empleado-form select {
-  padding: 0.6rem 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.7); /* borde blanco */
-  border-radius: 8px;
-  outline: none;
-  font-size: 1rem;
-  color: #ffffff; /* texto blanco */
-  background-color: rgba(255, 255, 255, 0.1); /* fondo transparente */
-  transition: all 0.3s ease;
+/* Estilo de inputs */
+.input-inner {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    background: transparent;
+    font-weight: 500;
+    color: #78350f;
 }
 
-.registro-empleado-form input::placeholder,
-.registro-empleado-form select::placeholder {
-  color: rgba(255, 255, 255, 0.7); /* placeholder blanco semi-transparente */
+/* Animación del borde */
+@keyframes rotateInputBorder {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
-.registro-empleado-form input:focus,
-.registro-empleado-form select:focus {
-  border-color: #ffffff;
-  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+/* Hover del borde animado */
+.input-card:hover::before {
+    filter: brightness(1.1);
 }
 
-.registro-empleado-form button {
-  padding: 0.8rem 1.2rem;
-  background-color: #ffffff; /* botón blanco */
-  color: rgba(2, 136, 209, 0.9); /* texto azul oscuro */
-  font-weight: 600;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+/* Botón */
+button {
+    padding: 0.8rem 1.2rem;
+    background-color: #ffffff;
+    color: rgba(2, 136, 209, 0.9);
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease, transform 0.3s ease;
+    content: none !important;
+    text-align: center;
 }
 
-.registro-empleado-form button:hover {
-  background-color: rgba(255, 255, 255, 0.9);
-  transform: scale(1.02);
+button:hover {
+    transform: scale(1.1) rotate(2deg);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
-/* Responsivo */
+/* Título h3 uniforme */
+.registro-proveedor-form h3 {
+    text-align: center;
+    color: #00070c;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Estilos del formulario */
+.registro-proveedor-form {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #f9f9f9;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-  .registro-empleado-form {
-    padding: 1.5rem;
-  }
-  .registro-empleado-form h3 {
-    font-size: 1.3rem;
-  }
+    .registro-proveedor-form {
+        max-width: 90%;
+        padding: 1.5rem;
+    }
 }
