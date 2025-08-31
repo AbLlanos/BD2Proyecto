@@ -1,76 +1,44 @@
+/* Contenedor principal */
 .contenedor {
-    padding: 30px;
-    background-color: #e6f0fa;
-    /* azul muy claro */
+    margin-top: 120px; /* Espacio para navbar fija */
+    padding: 2rem;
+    background: linear-gradient(135deg, #e3f2fd, #f1f8ff);
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.img {
-    width: 100%;
-    height: 500px;
-    object-fit: contain;
-    border-radius: 20px;
-}
-
-.tarjeta {
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    border-radius: 10px;
-    background-color: #cce4f6;
-    /* azul pastel */
-    padding: 15px;
-    margin-bottom: 20px;
-    margin-top: 20px;
-}
-
-.card-hover {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 30px;
-    background-color: #a3d2f0;
-    /* azul medio */
-}
-
-.card-hover:hover {
-    transform: scale(1.02);
-    box-shadow: 0 10px 20px rgba(0, 60, 120, 0.3);
-}
-
+/* Título principal */
 .titulo {
-    font-size: 50px;
-    color: #1e3a8a;
-    /* azul marino */
+    font-size: 2.8rem;
+    color: #0288d1;
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 2rem;
+    font-weight: bold;
+    text-shadow: 0 2px 4px rgba(2, 136, 209, 0.3);
+    animation: fadeInUp 1s ease;
 }
 
-input:hover,
-select:hover,
-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 60, 120, 0.3);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+/* Grid de productos */
+.productos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.caja {
-    background-color: #dceeff;
-    /* azul clarito */
-    border-radius: 20px;
-    padding: 10px;
-    margin-bottom: 15px;
-    justify-content: center;
-    align-items: flex-start;
-    text-align: left;
-    box-shadow: 0 8px 16px rgba(0, 60, 120, 0.2);
-}
-
+/* Card del producto con borde animado */
 .card-producto {
     position: relative;
     overflow: hidden;
     border-radius: 20px;
-    background: #ffffff;
+    background: transparent;
     z-index: 0;
+    padding: 4px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Borde animado giratorio */
 .card-producto::before {
     content: '';
     position: absolute;
@@ -78,98 +46,229 @@ button:hover {
     height: 300%;
     top: -100%;
     left: -100%;
-    background-image: linear-gradient(180deg, #60a5fa, #1e40af);
-    /* azul claro a azul oscuro */
-    animation: rotCardBorder 2s linear infinite;
+    background-image: linear-gradient(45deg, rgba(2, 136, 209, 0.8), rgba(101, 181, 224, 0.8), rgba(3, 169, 244, 0.8), rgba(2, 136, 209, 0.8));
+    animation: rotateCardBorder 6s linear infinite;
     z-index: 0;
 }
 
+/* Fondo interior de la card */
 .card-producto::after {
     content: '';
     position: absolute;
-    inset: 5px;
+    inset: 3px;
     background: #ffffff;
-    border-radius: 15px;
+    border-radius: 17px;
+    z-index: 1;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenido de la card */
+.card-content {
+    position: relative;
+    z-index: 2;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Efecto hover */
+.card-producto:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(2, 136, 209, 0.2);
+}
+
+.card-producto:hover::before {
+    animation: rotateCardBorder 3s linear infinite; /* Más rápido en hover */
+    filter: brightness(1.2);
+}
+
+/* Container de imagen */
+.imagen-container {
+    text-align: center;
+}
+
+/* Imagen del producto */
+.producto-img {
+    width: 100%;
+    max-width: 280px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 3px solid rgba(2, 136, 209, 0.2);
+    transition: transform 0.3s ease;
+    display: block;
+    margin: 0 auto;
+}
+
+.producto-img:hover {
+    transform: scale(1.05);
+}
+
+/* Container de información */
+.info-container {
+    background: linear-gradient(135deg, rgba(2, 136, 209, 0.05), rgba(101, 181, 224, 0.05));
+    border-radius: 12px;
+    padding: 1.2rem;
+    border: 1px solid rgba(2, 136, 209, 0.1);
+}
+
+/* ID del producto */
+.producto-id {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #0288d1;
+    text-align: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid rgba(2, 136, 209, 0.2);
+}
+
+/* Detalles del producto */
+.producto-detalles {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.producto-detalles p {
+    margin: 0;
+    color: #1565c0;
+    font-weight: 500;
+}
+
+.producto-detalles strong {
+    color: #0d47a1;
+}
+
+/* Container del botón */
+.boton-container {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+/* Botón de comprar */
+.boton-comprar {
+    position: relative;
+    width: 100%;
+    max-width: 200px;
+    padding: 4px;
+    background: transparent;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    overflow: hidden;
+    z-index: 0;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+/* Borde animado del botón */
+.boton-comprar::before {
+    content: '';
+    position: absolute;
+    width: 300%;
+    height: 300%;
+    top: -100%;
+    left: -100%;
+    background-image: linear-gradient(45deg, rgba(5, 105, 119, 0.8), rgba(8, 145, 145, 0.8), rgba(3, 162, 170, 0.8));
+    animation: rotateButtonBorder 4s linear infinite;
+    z-index: 0;
+}
+
+/* Fondo interior del botón */
+.boton-comprar::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    background: linear-gradient(135deg, #f7f8f7, #036878);
+    border-radius: 9px;
     z-index: 1;
 }
 
-@keyframes rotCardBorder {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
+/* Texto del botón */
+.boton-comprar {
+    color: rgb(8, 8, 8);
+    position: relative;
 }
 
-/* Para mantener contenido arriba del after */
-.card-producto>* {
+.boton-comprar span {
     position: relative;
     z-index: 2;
-}
-
-/* Botón */
-.codepen-button {
     display: block;
-    cursor: pointer;
-    color: white;
-    margin: 0 auto;
-    position: relative;
-    text-decoration: none;
-    font-weight: 600;
-    border-radius: 6px;
-    overflow: hidden;
-    padding: 3px;
-    isolation: isolate;
+    padding: 0.8rem 1.5rem;
 }
 
-.codepen-button::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 400%;
-    height: 100%;
-    background: linear-gradient(115deg,
-            #3b82f6,
-            #60a5fa,
-            #2563eb,
-            #1e40af,
-            #0ea5e9);
-    background-size: 25% 100%;
-    animation: animated-border 0.75s linear infinite;
-    animation-play-state: paused;
-    translate: -5% 0%;
-    transition: translate 0.25s ease-out;
+/* Hover del botón */
+.boton-comprar:hover {
+    transform: translateY(-2px) scale(1.05);
 }
 
-.codepen-button:hover::before {
-    animation-play-state: running;
-    transition-duration: 0.75s;
-    translate: 0% 0%;
+.boton-comprar:hover::before {
+    animation: rotateButtonBorder 2s linear infinite;
+    filter: brightness(1.2);
 }
 
-@keyframes animated-border {
-    to {
-        transform: translateX(-25%);
+/* Botón agotado */
+.boton-comprar.agotado::before {
+    background-image: linear-gradient(45deg, rgba(244, 67, 54, 0.8), rgba(255, 87, 34, 0.8), rgba(244, 67, 54, 0.8));
+}
+
+.boton-comprar.agotado::after {
+    background: linear-gradient(135deg, #f44336, #ff5722);
+}
+
+.boton-comprar.agotado {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.boton-comprar.agotado:hover {
+    transform: none;
+}
+
+/* Animaciones */
+@keyframes rotateCardBorder {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes rotateButtonBorder {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .contenedor {
+        margin-top: 100px;
+        padding: 1rem;
     }
-}
-
-.codepen-button span {
-    position: relative;
-    display: block;
-    padding: 1rem 1.5rem;
-    font-size: 1.1rem;
-    background: #2563eb;
-    border-radius: 10px;
-    height: 100%;
-}
-
-.pointer-events-none {
-    pointer-events: none;
-}
-
-.opacity-50 {
-    opacity: 0.5;
+    
+    .titulo {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .productos-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .card-content {
+        padding: 1rem;
+        gap: 1rem;
+    }
+    
+    .producto-img {
+        max-width: 100%;
+        height: 180px;
+    }
 }

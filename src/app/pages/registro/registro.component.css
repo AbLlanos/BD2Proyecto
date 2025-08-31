@@ -1,0 +1,179 @@
+/* Hero */
+.hero {
+  margin-top: 100px; /* ajusta según el alto de tu navbar */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.hero-content {
+  max-width: 450px;
+}
+
+.hero-content h1 {
+  font-size: 2.8rem;
+  color: #0288d1;
+  margin-bottom: 1rem;
+  animation: fadeInUp 1s ease;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  color: #555;
+  animation: fadeInUp 1.5s ease;
+}
+
+.hero-img img {
+  max-width: 400px;
+  border-radius: 15px;
+  animation: floatImage 5s ease-in-out infinite;
+}
+
+/* Sección de Registro */
+.registro {
+  margin: 3rem auto;
+  padding: 2rem;
+  max-width: 900px;
+  text-align: center;
+  background: linear-gradient(135deg, #e3f2fd, #f1f8ff);
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.registro-titles {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Botones de registro con borde animado */
+.registro-titles h2 {
+  position: relative;
+  cursor: pointer;
+  padding: 4px; /* Padding para el efecto de borde */
+  border-radius: 30px;
+  background: transparent;
+  overflow: hidden;
+  z-index: 0;
+  transition: all 0.3s ease;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  box-shadow: 0 4px 15px rgba(2, 136, 209, 0.3);
+}
+
+/* Borde animado giratorio */
+.registro-titles h2::before {
+  content: '';
+  position: absolute;
+  width: 300%;
+  height: 300%;
+  top: -100%;
+  left: -100%;
+  background-image: linear-gradient(10deg, rgba(2, 136, 209, 0.9), rgba(101, 181, 224, 0.9), rgba(3, 169, 244, 0.9), rgba(2, 136, 209, 0.9));
+  animation: rotateButtonBorder 4s linear infinite;
+  z-index: 0;
+  transition: all 0.1s ease;
+}
+
+/* Fondo interior del botón */
+.registro-titles h2::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  background: linear-gradient(135deg, #0288d1, #03a9f4);
+  border-radius: 27px;
+  z-index: 1;
+}
+
+/* Botón activo - borde más brillante */
+.registro-titles h2.active::before {
+  background-image: linear-gradient(10deg, rgba(3, 169, 244, 1), rgba(2, 136, 209, 1), rgba(101, 181, 224, 1), rgba(3, 169, 244, 1));
+  animation: rotateButtonBorder 3s linear infinite; /* Más rápido cuando está activo */
+}
+
+/* Texto del botón - color original */
+.registro-titles h2 span {
+  position: relative;
+  z-index: 2;
+  display: block;
+  padding: 0.7rem 2rem;
+  color: white; /* Color blanco original */
+  font-weight: 600;
+}
+
+/* Botón activo - borde más brillante */
+.registro-titles h2.active::before {
+  background-image: linear-gradient(10deg, rgba(3, 169, 244, 1), rgba(2, 136, 209, 1), rgba(101, 181, 224, 1), rgba(3, 169, 244, 1));
+  animation: rotateButtonBorder 3s linear infinite; /* Más rápido cuando está activo */
+}
+
+.registro-titles h2.active::after {
+  background: linear-gradient(135deg, #03a9f4, #0288d1);
+  box-shadow: inset 0 2px 10px rgba(3, 169, 244, 0.3);
+}
+
+/* Efecto hover */
+.registro-titles h2:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(3, 169, 244, 0.5);
+}
+
+.registro-titles h2:hover::before {
+  filter: brightness(1.2);
+  animation: rotateButtonBorder 2s linear infinite; /* Más rápido en hover */
+}
+
+.form-center-container {
+  display: flex;
+  justify-content: center;
+}
+
+.form-wrapper {
+  width: 100%;
+  max-width: 600px;
+  animation: fadeIn 0.6s ease;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(15px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(25px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floatImage {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+/* Animación del borde giratorio para botones */
+@keyframes rotateButtonBorder {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+  .hero-img img {
+    max-width: 80%;
+  }
+  .registro-titles {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

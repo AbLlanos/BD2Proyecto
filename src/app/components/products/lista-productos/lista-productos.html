@@ -1,42 +1,35 @@
 <app-navbar></app-navbar>
 
-<div class="contenedor p-6 bg-blue-50 min-h-screen">
+<div class="contenedor">
+    <h1 class="titulo">Lista de Productos</h1>
 
-    <h1 class="text-3xl font-bold text-blue-700 text-center mb-8">Lista de Productos</h1>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="productos-grid">
         @for (producto of productos; track producto.id_producto) {
-
-        <div
-            class="card-producto shadow-xl p-4 transform transition-transform duration-300 hover:scale-105 rounded-2xl bg-white">
-
-            <div class="flex flex-col md:flex-row gap-4 items-center">
-
+        <div class="card-producto">
+            <div class="card-content">
                 <!-- Imagen -->
-                <img class="w-full md:w-48 h-48 object-cover rounded-xl border border-blue-400" [src]="producto.imgUrl"
-                    alt="{{ producto.nombre }}" />
+                <div class="imagen-container">
+                    <img class="producto-img" [src]="producto.imgUrl" alt="{{ producto.nombre }}" />
+                </div>
 
-                <!-- Info con fondo azul claro -->
-                <div class="flex-1 bg-blue-100 rounded-xl p-4 space-y-2 text-blue-900 shadow-inner">
-                    <h2 class="text-xl font-bold">ID: {{ producto.id_producto }}</h2>
-                    <p><strong>Nombre:</strong> {{ producto.nombre }}</p>
-                    <p><strong>Precio:</strong> ${{ producto.precio }}</p>
-                    <p><strong>Cantidad:</strong> {{ producto.cantidad }}</p>
-                    <p><strong>IVA:</strong> {{ producto.iva * 100 }}%</p>
-                    <p><strong>Categoría:</strong> {{ getNombreCategoria(producto) }}</p>
-                    <p><strong>Proveedor:</strong> {{ getNombreProveedor(producto) }}</p>
+                <!-- Info del producto -->
+                <div class="info-container">
+                    <h2 class="producto-id">ID: {{ producto.id_producto }}</h2>
+                    <div class="producto-detalles">
+                        <p><strong>Nombre:</strong> {{ producto.nombre }}</p>
+                        <p><strong>Precio:</strong> ${{ producto.precio }}</p>
+                        <p><strong>Cantidad:</strong> {{ producto.cantidad }}</p>
+                        <p><strong>IVA:</strong> {{ producto.iva * 100 }}%</p>
+                        <p><strong>Categoría:</strong> {{ getNombreCategoria(producto) }}</p>
+                        <p><strong>Proveedor:</strong> {{ getNombreProveedor(producto) }}</p>
+                    </div>
 
-                    <!-- Botón y estado -->
-                    <div class="mt-3 text-center">
-                        <button type="button"
-                            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-transform transform hover:scale-105"
-                            (click)="comprar(producto)" [disabled]="producto.cantidad === 0">
-                            Comprar
+                    <!-- Botón de compra -->
+                    <div class="boton-container">
+                        <button type="button" class="boton-comprar" (click)="comprar(producto)"
+                            [disabled]="producto.cantidad === 0" [class.agotado]="producto.cantidad === 0">
+                            <span> {{ producto.cantidad === 0 ? 'Agotado' : 'Comprar' }} </span>
                         </button>
-
-                        @if (producto.cantidad === 0) {
-                        <p class="text-red-500 font-semibold mt-2">Agotado</p>
-                        }
                     </div>
                 </div>
             </div>

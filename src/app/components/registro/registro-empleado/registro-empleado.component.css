@@ -1,9 +1,4 @@
-/* Contenedor general */
-.container1 {
-    background-color: #7c7c7c;
-}
-
-/* === INPUT CON BORDE ANIMADO ESTILO CARD === */
+/* === INPUT / TEXTAREA CON BORDE ANIMADO ESTILO CARD === */
 .input-card {
     position: relative;
     border-radius: 12px;
@@ -21,7 +16,7 @@
     height: 300%;
     top: -100%;
     left: -100%;
-    background-image: linear-gradient(180deg, #facc15, #d97706);
+    background-image: linear-gradient(10deg, rgba(2, 136, 209, 0.9), rgba(101, 181, 224, 0.9));
     animation: rotateInputBorder 4s linear infinite;
     z-index: 0;
     transition: all 0.1s ease;
@@ -31,7 +26,7 @@
     content: '';
     position: absolute;
     inset: 3px;
-    background: #ffffff;
+    background: rgba(211, 226, 234, 0.9);
     border-radius: 10px;
     z-index: 1;
 }
@@ -42,7 +37,7 @@
     z-index: 2;
 }
 
-/* Estilo de los inputs y selects */
+/* Estilo de inputs */
 .input-inner {
     width: 100%;
     border: none;
@@ -65,13 +60,47 @@
     filter: brightness(1.1);
 }
 
-/* Botones */
+/* Botón */
 button {
-    transition: transform 0.3s ease-in-out;
+    padding: 0.8rem 1.2rem;
+    background-color: #ffffff;
+    color: rgba(2, 136, 209, 0.9);
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
     cursor: pointer;
+    transition: all 0.3s ease, transform 0.3s ease;
+    content: none !important;
+    text-align: center;
 }
 
 button:hover {
     transform: scale(1.1) rotate(2deg);
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Título h3 uniforme */
+.registro-proveedor-form h3 {
+    text-align: center;
+    color: #00070c;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Estilos del formulario */
+.registro-proveedor-form {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #f9f9f9;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .registro-proveedor-form {
+        max-width: 90%;
+        padding: 1.5rem;
+    }
 }

@@ -1,0 +1,36 @@
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background: none;   /* sin fondo */
+}
+
+.hero img {
+  max-width: 100%;     
+  height: auto;        
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  
+  /* Animaciones */
+  animation: fadeZoom 1.2s ease-out, floatImage 5s ease-in-out infinite;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.hero img:hover {
+  transform: scale(1.08) rotate(1deg);
+  box-shadow: 0 12px 35px rgba(0, 180, 255, 0.6);
+}
+
+/* 🔹 Animación al aparecer */
+@keyframes fadeZoom {
+  0% { opacity: 0; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* 🔹 Animación flotante infinita */
+@keyframes floatImage {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+  
