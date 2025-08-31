@@ -10,8 +10,6 @@ import { RegistroClienteComponent } from '../../components/registro/registro-cli
   standalone: true,
   imports: [
     CommonModule,
-    Navbar,
-    HeroRegistroComponent,
     RegistroEmpleadoComponent,
     RegistroClienteComponent,
   ],

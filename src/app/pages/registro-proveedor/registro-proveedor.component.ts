@@ -7,7 +7,7 @@ import { ComponenteProve1Component } from "../../components/proveedor/componente
 @Component({
   selector: 'app-registro-proveedor',
   standalone: true,
-  imports: [CommonModule, Navbar, Footer, ComponenteProve1Component],
+  imports: [CommonModule],
   templateUrl: './registro-proveedor.component.html',
   styleUrls: ['./registro-proveedor.component.css']
 })

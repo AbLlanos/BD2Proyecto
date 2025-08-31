@@ -8,7 +8,7 @@ import { TestimonioHomeComponent } from "../../components/testimonio-home/testim
 
 @Component({
   selector: 'app-home',
-  imports: [Navbar, Footer, HeroHomeComponent, OfertasEspecialesComponent, TestimonioHomeComponent],
+  imports: [Navbar, HeroHomeComponent, OfertasEspecialesComponent, TestimonioHomeComponent],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })

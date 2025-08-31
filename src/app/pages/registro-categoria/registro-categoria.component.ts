@@ -7,7 +7,7 @@ import { CrearCategoriaComponent } from "../../components/categoria/crear-catego
 @Component({
   selector: 'app-registro-categoria',
   standalone: true,
-  imports: [CommonModule, Navbar, Footer, RegistroCategoriaComponent, CrearCategoriaComponent],
+  imports: [CommonModule],
   templateUrl: './registro-categoria.component.html',
   styleUrls: ['./registro-categoria.component.css']
 })

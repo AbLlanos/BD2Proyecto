@@ -1,8 +1,8 @@
 /* Navbar container */
 .navbar {
-    background-color: rgba(2, 136, 209, 0.5);
+    background-color: rgba(12, 134, 199, 0.925);
     /* azul oscuro elegante */
-    box-shadow: 0 0 12px rgba(173, 216, 230, 0.6);
+    box-shadow: 0 0 12px rgba(0, 125, 167, 0.6);
     /* azul claro brillante */
     position: fixed;
     width: 100%;
@@ -38,11 +38,9 @@
     align-items: center;
     gap: 0.5rem;
     font-weight: 800;
-    font-size: 1.8rem;
+    font-size: 1.2rem;
     color: #ffffff;
-    /* blanco puro */
     text-shadow: 1px 1px 2px #00264d;
-    /* sombra azul más oscuro */
     user-select: none;
     transition: transform 0.3s ease;
 }
