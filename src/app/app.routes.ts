@@ -8,6 +8,8 @@ import { RegistroProveedorComponent } from './pages/registro-proveedor/registro-
 import { RegistroCategoriaComponent } from './pages/registro-categoria/registro-categoria.component';
 import { FormularioRegistroProveedor } from './components/proveedor/formulario-registro-proveedor/formulario-registro-proveedor';
 import { FormularioRegistroCategoria } from './components/categoria/formulario-registro-categoria/formulario-registro-categoria';
+import { VentaComponent } from './components/venta/venta';
+
 
 export const routes: Routes = [
 
@@ -24,5 +26,8 @@ export const routes: Routes = [
     { path: "registro", component: RegistroComponent },
     /*Ruta para Registro Proveedor*/
     {path: "registro-proveedor", component: FormularioRegistroProveedor} ,
-    {path: "registro-categoria", component: FormularioRegistroCategoria}
+    {path: "registro-categoria", component: FormularioRegistroCategoria},
+
+    /*Ventra*/
+    {path: "registroVenta", component: VentaComponent}
 ];
