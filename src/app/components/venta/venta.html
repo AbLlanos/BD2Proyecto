@@ -1,75 +1,105 @@
 <app-navbar></app-navbar>
 
 <div class="container1 w-full min-h-screen flex items-center justify-center bg-blue-50 px-4 py-24">
-    <div class="w-full max-w-4xl bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row">
 
-        <div class="w-full md:w-1/2 h-64 md:h-auto">
-            <img src="https://images.pexels.com/photos/6169056/pexels-photo-6169056.jpeg" alt="Imagen de venta"
-                class="w-full h-full object-cover object-center">
-        </div>
+  <div class="w-full max-w-4xl bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row">
 
-        <div class="w-full md:w-1/2 p-8 flex flex-col justify-center space-y-6">
-
-            <div class="bg-blue-100 p-6 rounded-xl shadow-lg">
-
-                <div class="text-center mb-6">
-                    <h1 class="text-4xl font-bold text-blue-700">Crear Venta</h1>
-                    <p class="text-blue-600 mt-2">Seleccione cliente, empleado y producto</p>
-                </div>
-
-                <form [formGroup]="ventaForm" (ngSubmit)="guardarVenta()" class="space-y-4">
-
-                    <!-- Cliente -->
-                    <div>
-                        <label class="block text-sm font-medium text-blue-700">Cliente</label>
-                        <select formControlName="cliente" class="w-full px-4 py-2 border border-blue-300 rounded-lg">
-                            <option [ngValue]="null">Seleccione un cliente</option>
-                            <option *ngFor="let c of clientes" [ngValue]="c">{{ c.nombre }}</option>
-                        </select>
-                    </div>
-
-                    <!-- Empleado -->
-                    <div>
-                        <label class="block text-sm font-medium text-blue-700">Empleado</label>
-                        <select formControlName="empleado" class="w-full px-4 py-2 border border-blue-300 rounded-lg">
-                            <option [ngValue]="null">Seleccione un empleado</option>
-                            <option *ngFor="let e of empleados" [ngValue]="e">{{ e.nombre }}</option>
-                        </select>
-                    </div>
-
-                    <!-- Producto -->
-                    <div>
-                        <label class="block text-sm font-medium text-blue-700">Producto</label>
-                        <select formControlName="producto" class="w-full px-4 py-2 border border-blue-300 rounded-lg">
-                            <option [ngValue]="null">Seleccione un producto</option>
-                            <option *ngFor="let p of productos" [ngValue]="p">{{ p.nombre }}</option>
-                        </select>
-                    </div>
-
-                    <!-- Cantidad disponible -->
-                    <div>
-                        <label class="block text-sm font-medium text-blue-700">Cantidad disponible</label>
-                        <input type="number" [value]="productoSeleccionado?.cantidad || 0" disabled
-                            class="w-full px-4 py-2 border border-blue-300 rounded-lg bg-gray-100" />
-                    </div>
-
-                    <!-- Cantidad a vender -->
-                    <div>
-                        <label class="block text-sm font-medium text-blue-700">Cantidad a vender</label>
-                        <input type="number" formControlName="cantidad" min="1"
-                            [max]="productoSeleccionado?.cantidad || 1"
-                            class="w-full px-4 py-2 border border-blue-300 rounded-lg" />
-                    </div>
-
-                    <!-- Botón Guardar -->
-                    <button type="submit"
-                        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg">
-                        Registrar Venta
-                    </button>
-
-                </form>
-            </div>
-
-        </div>
+    <!-- Imagen lateral -->
+    <div class="w-full md:w-1/2 h-64 md:h-auto">
+      <img src="https://images.pexels.com/photos/6169056/pexels-photo-6169056.jpeg" alt="Imagen de venta"
+        class="w-full h-full object-cover object-center">
     </div>
+
+    <!-- Contenido del formulario -->
+    <div class="w-full md:w-1/2 p-8 flex flex-col justify-center space-y-6">
+
+      <div class="bg-blue-100 p-6 rounded-xl shadow-lg">
+
+        <!-- Título -->
+        <div class="text-center mb-6">
+          <h1 class="text-4xl font-bold text-blue-700">Crear Venta</h1>
+          <p class="text-blue-600 mt-2">Seleccione cliente, empleado y producto</p>
+
+          <div class="mt-6 flex justify-center">
+            <img src="https://cdn-icons-png.flaticon.com/128/263/263142.png" alt="Logo"
+              class="w-28 h-24">
+          </div>
+        </div>
+
+        <!-- Formulario -->
+        <form [formGroup]="ventaForm" (ngSubmit)="guardarVenta()" class="space-y-4">
+
+          <!-- Cliente -->
+          <div>
+            <label class="block text-sm font-medium text-blue-700">Cliente</label>
+            <select formControlName="cliente"
+              class="w-full px-4 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+              <option [ngValue]="null" disabled selected>Seleccione un cliente</option>
+              @for (c of clientes; track c.id_cliente) {
+              <option [ngValue]="c">{{ c.nombre }}</option>
+              }
+            </select>
+            @if (ventaForm.get('cliente')?.invalid && ventaForm.get('cliente')?.touched) {
+            <span class="text-red-500 text-sm">Debe seleccionar un cliente</span>
+            }
+          </div>
+
+          <!-- Empleado -->
+          <div>
+            <label class="block text-sm font-medium text-blue-700">Empleado</label>
+            <select formControlName="empleado"
+              class="w-full px-4 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+              <option [ngValue]="null" disabled selected>Seleccione un empleado</option>
+              @for (e of empleados; track e.id_empleado) {
+              <option [ngValue]="e">{{ e.nombre }}</option>
+              }
+            </select>
+            @if (ventaForm.get('empleado')?.invalid && ventaForm.get('empleado')?.touched) {
+            <span class="text-red-500 text-sm">Debe seleccionar un empleado</span>
+            }
+          </div>
+
+          <!-- Producto -->
+          <div>
+            <label class="block text-sm font-medium text-blue-700">Producto</label>
+            <select formControlName="producto"
+              class="w-full px-4 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+              <option [ngValue]="null" disabled selected>Seleccione un producto</option>
+              @for (p of productos; track p.id_producto) {
+              <option [ngValue]="p">{{ p.nombre }}</option>
+              }
+            </select>
+            @if (ventaForm.get('producto')?.invalid && ventaForm.get('producto')?.touched) {
+            <span class="text-red-500 text-sm">Debe seleccionar un producto</span>
+            }
+          </div>
+
+          <!-- Cantidad disponible -->
+          <div>
+            <label class="block text-sm font-medium text-blue-700">Cantidad disponible</label>
+            <input type="number" [value]="productoSeleccionado?.cantidad || 0" disabled
+              class="w-full px-4 py-2 border border-blue-300 rounded-lg bg-gray-100" />
+          </div>
+
+          <!-- Cantidad a vender -->
+          <div>
+            <label class="block text-sm font-medium text-blue-700">Cantidad a vender</label>
+            <input type="number" formControlName="cantidad" min="1"
+              [max]="productoSeleccionado?.cantidad || 1"
+              class="w-full px-4 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
+            @if (ventaForm.get('cantidad')?.invalid && ventaForm.get('cantidad')?.touched) {
+            <span class="text-red-500 text-sm">Ingrese una cantidad válida</span>
+            }
+          </div>
+
+          <!-- Botón -->
+          <button type="submit"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-transform transform hover:scale-105">
+            Registrar Venta
+          </button>
+
+        </form>
+      </div>
+    </div>
+  </div>
 </div>

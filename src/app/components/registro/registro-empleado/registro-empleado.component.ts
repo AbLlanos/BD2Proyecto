@@ -29,9 +29,8 @@ ngOnInit(): void {
     apellido: ['', [Validators.required, Validators.minLength(2)]],
     cargo: ['', [Validators.required, Validators.minLength(2)]],
     salario: [0, [Validators.required, Validators.min(0.01)]],
-    usuario: ['', [Validators.required, Validators.minLength(3)]],
+    email: ['', [Validators.required, Validators.minLength(3)]],
     password: ['', [Validators.required, Validators.minLength(6)]],
-    rol: ['EMPLEADO', Validators.required]
   });
 }
 
@@ -42,11 +41,21 @@ ngOnInit(): void {
       return;
     }
 
+    const formValue = this.empleadoForm.value;
+
+    // Siempre asignamos rol CLIENTE
+    const empleadoAGuardar: Empleado = {
+      ...formValue,
+      rol: 'EMPLEADO'
+    };
+
     const empleado: Empleado = this.empleadoForm.value;
 
-    this.empleadoService.guardarEmpleado(empleado).subscribe(() => {
+    this.empleadoService.guardarEmpleado(empleadoAGuardar).subscribe(() => {
       alert("Empleado registrado correctamente");
       this.router.navigate(['/home']);
     });
   }
+
+
 }

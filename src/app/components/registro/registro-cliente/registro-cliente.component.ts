@@ -46,7 +46,7 @@ export class RegistroClienteComponent implements OnInit {
     // Siempre asignamos rol CLIENTE
     const clienteAGuardar: Cliente = {
       ...formValue,
-      rol: 'CLIENTE'
+      rol: 'cliente'
     };
 
     this.clienteService.guardarCliente(clienteAGuardar).subscribe({

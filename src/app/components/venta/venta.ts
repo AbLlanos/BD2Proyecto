@@ -40,20 +40,56 @@ export class VentaComponent implements OnInit {
       cliente: [null, Validators.required],
       empleado: [null, Validators.required],
       producto: [null, Validators.required],
-      cantidad: [1, [Validators.required, Validators.min(1)]],
+      cantidad: [
+        1,
+        [
+          Validators.required,
+          Validators.min(1),
+          Validators.pattern(/^[0-9]+$/) // solo enteros
+        ]
+      ],
     });
 
+    // Cargar data
     this.productoService.leerProductos().subscribe(data => this.productos = data);
     this.clienteService.leerClientes().subscribe(data => this.clientes = data);
     this.empleadoService.leerEmpleados().subscribe(data => this.empleados = data);
+
+    // Recalcular validación dinámica de cantidad cuando cambia el producto
+    this.ventaForm.get('producto')?.valueChanges.subscribe((prod: Producto) => {
+      const cantidadCtrl = this.ventaForm.get('cantidad');
+      if (prod) {
+        cantidadCtrl?.setValidators([
+          Validators.required,
+          Validators.min(1),
+          Validators.max(prod.cantidad),
+          Validators.pattern(/^[0-9]+$/)
+        ]);
+      } else {
+        cantidadCtrl?.setValidators([
+          Validators.required,
+          Validators.min(1),
+          Validators.pattern(/^[0-9]+$/)
+        ]);
+      }
+      cantidadCtrl?.updateValueAndValidity();
+    });
   }
 
+  // 🔎 Getter para producto seleccionado
   get productoSeleccionado(): Producto | null {
     return this.ventaForm.get('producto')?.value;
   }
 
+  // 🔎 Cantidad disponible del producto
   get cantidadDisponible(): number {
     return this.productoSeleccionado ? this.productoSeleccionado.cantidad : 0;
+  }
+
+  // 🔎 Simplificación para saber si un campo es inválido
+  campoInvalido(campo: string): boolean {
+    const control = this.ventaForm.get(campo);
+    return !!(control?.invalid && control?.touched);
   }
 
   guardarVenta() {
