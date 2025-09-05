@@ -24,16 +24,14 @@ export class EditarCategoria implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // Inicializar el form vacío
+    
     this.categoriaForm = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(2)]],
       descripcion: ['', [Validators.required, Validators.minLength(5)]]
     });
 
-    // Capturar el id de la URL
     this.idCategoria = this.route.snapshot.paramMap.get('id') || '';
 
-    // Cargar los datos de la categoría
     if (this.idCategoria) {
       this.servicioCategoria.buscarCategoriabyId(this.idCategoria).subscribe(categoria => {
         this.categoriaForm.patchValue({

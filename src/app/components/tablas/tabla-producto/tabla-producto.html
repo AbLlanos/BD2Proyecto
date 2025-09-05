@@ -1,9 +1,9 @@
-<div class="container mx-auto mt-10">
+<div class="container mx-auto mt-10 mb-10">
     <h1 class="text-3xl font-bold mb-6 text-center text-blue-700">Lista de Productos</h1>
 
     <table class="w-full border-collapse bg-white shadow-lg rounded-lg overflow-hidden">
         <thead class="bg-blue-600 text-white">
-            <tr>
+            <tr class="text-center">
                 <th class="p-3">Nombre</th>
                 <th class="p-3">Precio</th>
                 <th class="p-3">Cantidad</th>
@@ -14,7 +14,7 @@
         </thead>
         <tbody>
             @for (prod of productos; track prod.id_producto) {
-            <tr class="border-b hover:bg-gray-100">
+            <tr class="border-b hover:bg-gray-100 text-center align-items-center">
                 <td class="p-3">{{ prod.nombre }}</td>
                 <td class="p-3">{{ prod.precio }}</td>
                 <td class="p-3">{{ prod.cantidad }}</td>
@@ -22,9 +22,9 @@
                 <td class="p-3">
                     <img [src]="prod.imgUrl" alt="img" class="w-16 h-16 object-cover rounded">
                 </td>
-                <td class="p-3 flex gap-2">
+                <td class="p-3 flex-end gap-2">
                     <button (click)="editarProducto(prod.id_producto!)"
-                        class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded-lg">
+                        class="bg-yellow-500 hover:bg-yellow-600 text-white mr-2 px-3 py-1 rounded-lg">
                         Editar
                     </button>
                     <button (click)="eliminarProducto(prod.id_producto!)"

@@ -10,7 +10,7 @@ export class EmpleadoService {
 
   private API_EMPLEADO = "http://localhost:8080/empleado";
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // Leer todos
   leerEmpleados(): Observable<Empleado[]> {
@@ -23,17 +23,18 @@ export class EmpleadoService {
   }
 
   // Buscar por ID
-  buscarEmpleadoById(id: number): Observable<Empleado> {
+  buscarEmpleadoById(id: string): Observable<Empleado> {
     return this.http.get<Empleado>(`${this.API_EMPLEADO}/${id}`);
   }
 
+
   // Eliminar
-  eliminarEmpleado(id: number): Observable<void> {
+  eliminarEmpleado(id: string): Observable<void> {
     return this.http.delete<void>(`${this.API_EMPLEADO}/eliminar/${id}`);
   }
 
   // Editar
-  editarEmpleado(id: number, empleado: Empleado): Observable<Empleado> {
+  editarEmpleado(id: string, empleado: Empleado): Observable<Empleado> {
     return this.http.put<Empleado>(`${this.API_EMPLEADO}/actualizar/${id}`, empleado);
   }
 }

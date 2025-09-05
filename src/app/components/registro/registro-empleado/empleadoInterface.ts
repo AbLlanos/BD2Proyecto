@@ -1,10 +1,11 @@
 export interface Empleado {
-  id_empleado?: number;
+  id_empleado?: string;
   nombre: string;
   apellido: string;
+  telefono: string;
   cargo: string;
   salario: number;
-  usuario: string;
+  email: string;
   password: string;
   rol: string;
 }
