@@ -1,0 +1,67 @@
+<div class="container1 w-full min-h-screen flex items-center justify-center bg-blue-50 px-6 mt-20">
+    <div class="w-full max-w-4xl bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row">
+
+        <div class="w-full md:w-1/2 h-64 md:h-auto">
+            <img src="https://images.pexels.com/photos/31888738/pexels-photo-31888738.jpeg" alt="Imagen de producto"
+                class="w-full h-full object-cover object-center">
+        </div>
+
+        <div class="w-full md:w-1/2 p-8 flex flex-col justify-center space-y-6">
+            <div class="bg-blue-100 p-6 rounded-xl shadow-lg">
+                <h1 class="text-4xl font-bold text-blue-700 text-center mb-4">Editar Producto</h1>
+
+                <form [formGroup]="productoForm" (ngSubmit)="onSubmit()" class="space-y-4">
+                    <!-- igual que el formulario de registro pero con los valores cargados -->
+                    <!-- Nombre -->
+                    <div>
+                        <label class="block text-sm font-medium text-blue-700">Nombre</label>
+                        <input type="text" formControlName="nombre" class="input-inner w-full" />
+                    </div>
+
+                    <!-- Precio -->
+                    <div>
+                        <label class="block text-sm font-medium text-blue-700">Precio</label>
+                        <input type="number" formControlName="precio" class="input-inner w-full" />
+                    </div>
+
+                    <!-- Cantidad -->
+                    <div>
+                        <label class="block text-sm font-medium text-blue-700">Cantidad</label>
+                        <input type="number" formControlName="cantidad" class="input-inner w-full" />
+                    </div>
+
+                    <!-- IVA -->
+                    <div>
+                        <label class="block text-sm font-medium text-blue-700">IVA (%)</label>
+                        <input type="number" formControlName="iva" step="0.01" min="0" max="1"
+                            class="input-inner w-full" />
+                    </div>
+
+                    <!-- Imagen -->
+                    <div>
+                        <label class="block text-sm font-medium text-blue-700">URL Imagen</label>
+                        <input type="text" formControlName="imgUrl" class="input-inner w-full" />
+                    </div>
+
+                    <!-- Categoría -->
+                    <div>
+                        <label class="block text-sm font-medium text-blue-700">Categoría</label>
+                        <input type="text" formControlName="id_categoria" class="input-inner w-full" />
+                    </div>
+
+                    <!-- Proveedor -->
+                    <div>
+                        <label class="block text-sm font-medium text-blue-700">Proveedor</label>
+                        <input type="text" formControlName="id_proveedor" class="input-inner w-full" />
+                    </div>
+
+                    <button type="submit"
+                        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg">
+                        Actualizar Producto
+                    </button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

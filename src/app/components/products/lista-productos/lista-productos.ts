@@ -6,11 +6,12 @@ import { Categoria } from '../../categoria/formulario-registro-categoria/categor
 import { Proveedor } from '../../proveedor/formulario-registro-proveedor/proveedor';
 import { categoriaService } from '../../../services/categoria';
 import { proveedorService } from '../../../services/proveedor';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-lista-productos',
-  imports: [Navbar],
+  imports: [Navbar, RouterLink],
   templateUrl: './lista-productos.html',
   styleUrl: './lista-productos.css'
 })
@@ -54,11 +55,13 @@ export class ListaProductos {
   }
 
   getNombreCategoria(producto: Producto): string {
-    return producto.categoria ? producto.categoria.nombre : 'Sin categoría';
+    const categoria = this.categorias.find(c => String(c.id_categoria) === String(producto.id_categoria));
+    return categoria ? categoria.nombre : 'Sin categoría';
   }
 
   getNombreProveedor(producto: Producto): string {
-    return producto.proveedor ? producto.proveedor.nombre : 'Sin proveedor';
+    const proveedor = this.proveedores.find(p => p.id_proveedor === producto.id_proveedor);
+    return proveedor ? proveedor.nombre : 'Sin proveedor';
   }
 
   comprar(producto: Producto): void {

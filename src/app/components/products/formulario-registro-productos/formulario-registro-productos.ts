@@ -8,10 +8,12 @@ import { categoriaService } from '../../../services/categoria';
 import { proveedorService } from '../../../services/proveedor';
 import { Categoria } from '../../categoria/formulario-registro-categoria/categoria';
 import { Proveedor } from '../../proveedor/formulario-registro-proveedor/proveedor';
+import { EditarProducto } from "../../edicion/editar-producto/editar-producto";
+import { TablaProducto } from "../../tablas/tabla-producto/tabla-producto";
 
 @Component({
   selector: 'app-formulario-registro-productos',
-  imports: [Navbar, CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [Navbar, CommonModule, FormsModule, ReactiveFormsModule, TablaProducto],
   templateUrl: './formulario-registro-productos.html',
   styleUrl: './formulario-registro-productos.css'
 })

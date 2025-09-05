@@ -21,18 +21,20 @@ export class RegistroEmpleadoComponent {
     private fb: FormBuilder,
     private empleadoService: EmpleadoService,
     private router: Router
-  ) {}
+  ) { }
 
-ngOnInit(): void {
-  this.empleadoForm = this.fb.group({
-    nombre: ['', [Validators.required, Validators.minLength(2)]],
-    apellido: ['', [Validators.required, Validators.minLength(2)]],
-    cargo: ['', [Validators.required, Validators.minLength(2)]],
-    salario: [0, [Validators.required, Validators.min(0.01)]],
-    email: ['', [Validators.required, Validators.minLength(3)]],
-    password: ['', [Validators.required, Validators.minLength(6)]],
-  });
-}
+  ngOnInit(): void {
+    this.empleadoForm = this.fb.group({
+      nombre: ['', [Validators.required, Validators.minLength(2)]],
+      apellido: ['', [Validators.required, Validators.minLength(2)]],
+      telefono: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+      cargo: ['', [Validators.required, Validators.minLength(2)]],
+      salario: [null, [Validators.required, Validators.min(0.01)]],
+      email: ['', [Validators.required, Validators.pattern(/^[\w\.\-]+@([\w\-]+\.)+[\w\-]{2,4}$/)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      rol: ['EMPLEADO']
+    });
+  }
 
 
   registrarEmpleado() {
@@ -43,19 +45,23 @@ ngOnInit(): void {
 
     const formValue = this.empleadoForm.value;
 
-    // Siempre asignamos rol CLIENTE
     const empleadoAGuardar: Empleado = {
       ...formValue,
       rol: 'EMPLEADO'
     };
 
-    const empleado: Empleado = this.empleadoForm.value;
-
-    this.empleadoService.guardarEmpleado(empleadoAGuardar).subscribe(() => {
-      alert("Empleado registrado correctamente");
-      this.router.navigate(['/home']);
+    this.empleadoService.guardarEmpleado(empleadoAGuardar).subscribe({
+      next: () => {
+        alert("Empleado registrado correctamente");
+        this.router.navigate(['/home']);
+      },
+      error: (err) => {
+        console.error('Error al registrar empleado:', err);
+        alert('Hubo un error al registrar el empleado.');
+      }
     });
   }
+
 
 
 }

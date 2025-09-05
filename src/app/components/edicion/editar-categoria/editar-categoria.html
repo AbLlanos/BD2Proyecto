@@ -12,11 +12,11 @@
             <div class="bg-blue-100 p-8 rounded-xl shadow-lg">
 
                 <div class="text-center mb-6">
-                    <h1 class="text-5xl font-bold text-blue-700">Registro Categoría</h1>
-                    <p class="text-blue-600 mt-2 text-lg">Ingrese los datos de la categoría</p>
+                    <h1 class="text-5xl font-bold text-blue-700">Editar Categoría</h1>
+                    <p class="text-blue-600 mt-2 text-lg">Actualice los datos de la categoría</p>
                 </div>
 
-                <form [formGroup]="categoriaForm" (ngSubmit)="registrarCategoria()" class="space-y-5">
+                <form [formGroup]="categoriaForm" (ngSubmit)="onSubmit()" class="space-y-5">
 
                     <!-- Nombre -->
                     <label class="text-blue-700 font-semibold mb-1">Nombre</label>
@@ -25,8 +25,9 @@
                             class="input-inner" />
                         @if (categoriaForm.get('nombre')?.invalid && categoriaForm.get('nombre')?.touched) {
                         <div class="text-center">
-                            <span class="text-red-500 text-sm mt-1">El nombre es obligatorio y mínimo 2
-                                caracteres</span>
+                            <span class="text-red-500 text-sm mt-1">
+                                El nombre es obligatorio y mínimo 2 caracteres
+                            </span>
                         </div>
                         }
                     </div>
@@ -38,8 +39,9 @@
                             class="input-inner" />
                         @if (categoriaForm.get('descripcion')?.invalid && categoriaForm.get('descripcion')?.touched) {
                         <div class="text-center">
-                            <span class="text-red-500 text-sm mt-1">La descripción es obligatoria y mínimo 5
-                                caracteres</span>
+                            <span class="text-red-500 text-sm mt-1">
+                                La descripción es obligatoria y mínimo 5 caracteres
+                            </span>
                         </div>
                         }
                     </div>
@@ -47,13 +49,10 @@
                     <!-- Botón -->
                     <button type="submit"
                         class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-transform transform hover:scale-105">
-                        Registrar Categoría
+                        Actualizar Categoría
                     </button>
-
                 </form>
             </div>
         </div>
     </div>
 </div>
-
-<app-tabla-categoria></app-tabla-categoria>

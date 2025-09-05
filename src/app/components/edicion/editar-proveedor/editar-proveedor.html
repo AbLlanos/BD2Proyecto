@@ -16,7 +16,7 @@
                     <p class="text-blue-600 mt-2 text-lg">Ingrese los datos del proveedor</p>
                 </div>
 
-                <form [formGroup]="proveedorForm" (ngSubmit)="registrarProveedor()" class="space-y-5">
+                <form [formGroup]="proveedorForm" (ngSubmit)="onSubmit()" class="space-y-5">
 
                     <!-- Nombre -->
                     <label class="text-blue-700 font-semibold mb-1">Nombre</label>
@@ -117,4 +117,3 @@
         </div>
     </div>
 </div>
-<app-tabla-proveedor></app-tabla-proveedor>

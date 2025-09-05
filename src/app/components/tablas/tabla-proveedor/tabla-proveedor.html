@@ -1,0 +1,41 @@
+<div class="container mx-auto mt-10">
+    <h1 class="text-3xl font-bold mb-6 text-center text-blue-700">Lista de Proveedores</h1>
+
+    <table class="w-full border-collapse bg-white shadow-lg rounded-lg overflow-hidden">
+        <thead class="bg-blue-600 text-white">
+            <tr>
+                <th class="p-3">Nombre</th>
+                <th class="p-3">RUC</th>
+                <th class="p-3">Razón Social</th>
+                <th class="p-3">Correo</th>
+                <th class="p-3">Teléfono</th>
+                <th class="p-3">Dirección</th>
+                <th class="p-3">Estado</th>
+                <th class="p-3">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (prov of proveedores; track prov.id_proveedor) {
+            <tr class="border-b hover:bg-gray-100">
+                <td class="p-3">{{ prov.nombre }}</td>
+                <td class="p-3">{{ prov.ruc }}</td>
+                <td class="p-3">{{ prov.razon_social }}</td>
+                <td class="p-3">{{ prov.correo }}</td>
+                <td class="p-3">{{ prov.telefono }}</td>
+                <td class="p-3">{{ prov.direccion }}</td>
+                <td class="p-3">{{ prov.estado }}</td>
+                <td class="p-3 flex gap-2">
+                    <button (click)="editarProveedor(prov.id_proveedor!)"
+                        class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded-lg">
+                        Editar
+                    </button>
+                    <button (click)="eliminarProveedor(prov.id_proveedor!)"
+                        class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg">
+                        Eliminar
+                    </button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

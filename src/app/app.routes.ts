@@ -9,6 +9,9 @@ import { RegistroCategoriaComponent } from './pages/registro-categoria/registro-
 import { FormularioRegistroProveedor } from './components/proveedor/formulario-registro-proveedor/formulario-registro-proveedor';
 import { FormularioRegistroCategoria } from './components/categoria/formulario-registro-categoria/formulario-registro-categoria';
 import { VentaComponent } from './components/venta/venta';
+import { EditarCategoria } from './components/edicion/editar-categoria/editar-categoria';
+import { EditarProducto } from './components/edicion/editar-producto/editar-producto';
+import { EditarProveedor } from './components/edicion/editar-proveedor/editar-proveedor';
 
 
 export const routes: Routes = [
@@ -21,12 +24,18 @@ export const routes: Routes = [
     /*Rutas Productos*/
     { path: "listaProductos", component: ListaProductos },
     { path: "registroProductos", component: FormularioRegistroProductos },
+    { path: "editar-producto/:id", component: EditarProducto },
 
     /*Ruta Registro Empleados y Clientes*/
     { path: "registro", component: RegistroComponent },
-    /*Ruta para Registro Proveedor*/
+
+    /*Rutas Proveedor*/
     {path: "registro-proveedor", component: FormularioRegistroProveedor} ,
+    { path: "editar-proveedor/:id", component: EditarProveedor },
+
+    // Rutas Categorias
     {path: "registro-categoria", component: FormularioRegistroCategoria},
+    {path: "editar-categoria/:id", component:EditarCategoria},
 
     /*Ventra*/
     {path: "registroVenta", component: VentaComponent}

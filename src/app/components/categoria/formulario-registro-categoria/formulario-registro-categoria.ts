@@ -6,27 +6,28 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { categoriaService } from '../../../services/categoria';
 import { Categoria } from './categoria';
+import { TablaCategoria } from "../../tablas/tabla-categoria/tabla-categoria";
 
 @Component({
   selector: 'app-formulario-registro-categoria',
-  imports: [CommonModule, ReactiveFormsModule,],
+  imports: [CommonModule, ReactiveFormsModule, TablaCategoria],
   templateUrl: './formulario-registro-categoria.html',
   styleUrl: './formulario-registro-categoria.css'
 })
 export class FormularioRegistroCategoria {
 
- categoriaForm!: FormGroup;
+  categoriaForm!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private categoriaService: categoriaService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.categoriaForm = this.fb.group({
-      nombre: ['', Validators.required],
-      descripcion: ['', Validators.required],
+      nombre: ['', [Validators.required, Validators.minLength(2)]],
+      descripcion: ['', [Validators.required, Validators.minLength(5)]],
     });
   }
 
