@@ -4,6 +4,8 @@ import { Navbar } from '../../components/general/navbar/navbar';
 import { HeroRegistroComponent } from '../../components/registro/hero-registro/hero-registro.component';
 import { RegistroEmpleadoComponent } from '../../components/registro/registro-empleado/registro-empleado.component';
 import { RegistroClienteComponent } from '../../components/registro/registro-cliente/registro-cliente.component';
+import { TablaEmpleado } from "../../components/tablas/tabla-empleado/tabla-empleado";
+import { TablaCliente } from "../../components/tablas/tabla-cliente/tabla-cliente";
 
 @Component({
   selector: 'app-registro',
@@ -12,7 +14,9 @@ import { RegistroClienteComponent } from '../../components/registro/registro-cli
     CommonModule,
     RegistroEmpleadoComponent,
     RegistroClienteComponent,
-  ],
+    TablaEmpleado,
+    TablaCliente
+],
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css'],
 })
@@ -30,4 +34,3 @@ export class RegistroComponent {
     }
   }
 }
-  

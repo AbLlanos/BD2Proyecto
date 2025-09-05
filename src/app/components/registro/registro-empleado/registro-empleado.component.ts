@@ -49,7 +49,7 @@ export class RegistroEmpleadoComponent {
       ...formValue,
       rol: 'EMPLEADO'
     };
-
+  console.log('📌 Enviando al backend:', empleadoAGuardar); //
     this.empleadoService.guardarEmpleado(empleadoAGuardar).subscribe({
       next: () => {
         alert("Empleado registrado correctamente");

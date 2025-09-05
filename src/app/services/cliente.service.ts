@@ -24,17 +24,17 @@ export class ClienteService {
   }
 
   // Buscar cliente por ID
-  buscarClienteById(id: number): Observable<Cliente> {
+  buscarClienteById(id: string): Observable<Cliente> {
     return this.http.get<Cliente>(`${this.API_CLIENTE}/${id}`);
   }
 
   // Eliminar cliente
-  eliminarCliente(id: number): Observable<void> {
+  eliminarCliente(id: string): Observable<void> {
     return this.http.delete<void>(`${this.API_CLIENTE}/eliminar/${id}`);
   }
 
   // Editar cliente
-  editarCliente(id: number, cliente: Cliente): Observable<Cliente> {
+  editarCliente(id: string, cliente: Cliente): Observable<Cliente> {
     return this.http.put<Cliente>(`${this.API_CLIENTE}/actualizar/${id}`, cliente);
   }
 }

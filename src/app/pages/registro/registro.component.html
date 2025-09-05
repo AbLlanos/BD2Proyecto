@@ -4,7 +4,7 @@
     <h1>Bienvenido al Registro</h1>
     <p class="text-center">Selecciona si deseas registrarte como empleado o cliente.</p>
   </div>
-  
+
   <!-- Imagen hero -->
   <div class="hero-img">
     <img src="https://i.imgur.com/ZaJtbaj.jpeg" alt="Registro">
@@ -22,15 +22,20 @@
       <span>Registro Cliente</span>
     </h2>
   </div>
-  
+
   <!-- Contenedor dinámico -->
   <div class="form-center-container">
     <div *ngIf="showEmpleado" class="form-wrapper fadeIn">
       <app-registro-empleado></app-registro-empleado>
     </div>
-    
+
     <div *ngIf="showCliente" class="form-wrapper fadeIn">
       <app-registro-cliente></app-registro-cliente>
     </div>
   </div>
 </section>
+
+<app-tabla-empleado></app-tabla-empleado>
+
+
+<app-tabla-cliente></app-tabla-cliente>

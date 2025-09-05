@@ -3,24 +3,33 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductosServices } from '../../../services/productos';
 import { CommonModule } from '@angular/common';
+import { Categoria } from '../../categoria/formulario-registro-categoria/categoria';
+import { Proveedor } from '../../proveedor/formulario-registro-proveedor/proveedor';
+import { categoriaService } from '../../../services/categoria';
+import { proveedorService } from '../../../services/proveedor';
 
 @Component({
   selector: 'app-editar-producto',
+  standalone: true,
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './editar-producto.html',
-  styleUrl: './editar-producto.css'
+  styleUrls: ['./editar-producto.css']
 })
 export class EditarProducto {
 
-    productoForm!: FormGroup;
+  productoForm!: FormGroup;
   id!: string;
+  categorias: Categoria[] = [];
+  proveedores: Proveedor[] = [];
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private productoService: ProductosServices
-  ) {}
+    private productoService: ProductosServices,
+    private categoriaService: categoriaService,
+    private proveedorService: proveedorService
+  ) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id')!;
@@ -35,8 +44,19 @@ export class EditarProducto {
       id_proveedor: ['', Validators.required],
     });
 
+    // 📌 cargar datos del producto
     this.productoService.buscarProductobyId(this.id).subscribe(producto => {
       this.productoForm.patchValue(producto);
+    });
+
+    // 📌 cargar categorías
+    this.categoriaService.leerCategoria().subscribe(data => {
+      this.categorias = data;
+    });
+
+    // 📌 cargar proveedores
+    this.proveedorService.leerProveedor().subscribe(data => {
+      this.proveedores = data;
     });
   }
 
@@ -48,4 +68,3 @@ export class EditarProducto {
     }
   }
 }
-
