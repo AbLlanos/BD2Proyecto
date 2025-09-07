@@ -1,12 +1,11 @@
 export interface Cliente {
-  id_cliente?: number;
+  id_cliente: string;
   nombre: string;
   apellido: string;
   cedula: string;
   email: string;
   telefono: string;
   direccion: string;
-  usuario: string;
   password: string;
   rol: string;
 }

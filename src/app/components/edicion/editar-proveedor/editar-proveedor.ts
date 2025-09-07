@@ -55,17 +55,18 @@ export class EditarProveedor {
     }
   }
 
-  onSubmit(): void {
+  actualizarProveedor(): void {
     if (this.proveedorForm.valid) {
       this.proveedorService.editarProveedor(this.idProveedor, this.proveedorForm.value)
         .subscribe(() => {
           alert('Proveedor actualizado correctamente');
-          this.router.navigate(['/lista-proveedores']);
+          this.router.navigate(['/registro-proveedor']);
         }, error => {
           console.error("Error al actualizar proveedor", error);
         });
     }
   }
+
 }
 
 

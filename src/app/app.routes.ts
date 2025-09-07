@@ -12,31 +12,38 @@ import { VentaComponent } from './components/venta/venta';
 import { EditarCategoria } from './components/edicion/editar-categoria/editar-categoria';
 import { EditarProducto } from './components/edicion/editar-producto/editar-producto';
 import { EditarProveedor } from './components/edicion/editar-proveedor/editar-proveedor';
+import { EditarEmpleado } from './components/edicion/editar-empleado/editar-empleado';
+import { EditarCliente } from './components/edicion/editar-cliente/editar-cliente';
 
 
 export const routes: Routes = [
 
-    /*Rutas generales*/
-    { path: "home", component: Home },
-    { path: "", redirectTo: "home", pathMatch: "full" },
-    { path: "nosotros", component: Nosotros },
+  /*Rutas generales*/
+  { path: "home", component: Home },
+  { path: "", redirectTo: "home", pathMatch: "full" },
+  { path: "nosotros", component: Nosotros },
 
-    /*Rutas Productos*/
-    { path: "listaProductos", component: ListaProductos },
-    { path: "registroProductos", component: FormularioRegistroProductos },
-    { path: "editar-producto/:id", component: EditarProducto },
+  /*Rutas Productos*/
+  { path: "listaProductos", component: ListaProductos },
+  { path: "registroProductos", component: FormularioRegistroProductos },
+  { path: "editar-producto/:id", component: EditarProducto },
 
-    /*Ruta Registro Empleados y Clientes*/
-    { path: "registro", component: RegistroComponent },
+  /*Ruta Registro Empleados y Clientes*/
+  { path: "registro", component: RegistroComponent },
+
+  { path: "editar-empleado/:id", component: EditarEmpleado },
+
+  /*Rutas de clientes*/
+  { path: "editar-cliente/:id", component: EditarCliente },
 
     /*Rutas Proveedor*/
-    {path: "registro-proveedor", component: FormularioRegistroProveedor} ,
-    { path: "editar-proveedor/:id", component: EditarProveedor },
+  { path: "registro-proveedor", component: FormularioRegistroProveedor },
+  { path: "editar-proveedor/:id", component: EditarProveedor },
 
-    // Rutas Categorias
-    {path: "registro-categoria", component: FormularioRegistroCategoria},
-    {path: "editar-categoria/:id", component:EditarCategoria},
+  // Rutas Categorias
+  { path: "registro-categoria", component: FormularioRegistroCategoria },
+  { path: "editar-categoria/:id", component: EditarCategoria },
 
-    /*Ventra*/
-    {path: "registroVenta", component: VentaComponent}
+  /*Ventra*/
+  { path: "registroVenta", component: VentaComponent }
 ];
