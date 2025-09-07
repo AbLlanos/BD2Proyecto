@@ -1,12 +1,14 @@
 import { VentaDetalle } from "./ventaDetalleInterface";
 
 export interface Venta {
-  id_venta?: number;
+  id_venta?: string;
   fecha: Date;
   total: number;
   iva_total: number;
-  estado: string;
-  cliente: { id_cliente: number };
-  empleado: { id_empleado: number };
-  detalles: VentaDetalle[];
+  descuento_total: number;
+  estado: "pendiente" | "pagado" | "anulado";
+  metodo_pago: "efectivo" | "tarjeta" | "transferencia";
+  id_cliente: string;
+  id_empleado: string;
+  detalles: string[];
 }

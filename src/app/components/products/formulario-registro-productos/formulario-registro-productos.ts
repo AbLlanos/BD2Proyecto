@@ -47,26 +47,34 @@ export class FormularioRegistroProductos {
   }
 
   agregarProducto() {
-    if (this.productoForm.invalid) {
-      this.productoForm.markAllAsTouched();
-      return;
-    }
+  if (this.productoForm.invalid) {
+    this.productoForm.markAllAsTouched();
+    return;
+  }
 
-    const formValue = this.productoForm.value;
+  const formValue = this.productoForm.value;
 
-    const productoAGuardar = {
-      ...formValue,
-      categoria: { id_categoria: formValue.id_categoria },
-      proveedor: { id_proveedor: formValue.id_proveedor }
-    };
+  // ✅ ENVIAR los campos requeridos por el esquema MongoDB
+  const productoAGuardar = {
+    nombre: formValue.nombre,
+    precio: formValue.precio,
+    cantidad: formValue.cantidad,
+    iva: formValue.iva,
+    imgUrl: formValue.imgUrl,
+    id_categoria: formValue.id_categoria,  
+    id_proveedor: formValue.id_proveedor   
+  };
 
-    delete productoAGuardar.id_categoria;
-    delete productoAGuardar.id_proveedor;
-
-    this.productoService.guardarProducto(productoAGuardar).subscribe(() => {
+  this.productoService.guardarProducto(productoAGuardar).subscribe({
+    next: () => {
       alert('Producto registrado correctamente');
       this.router.navigate(['/listaProductos']);
-    });
-  }
+    },
+    error: (err) => {
+      console.error('Error al guardar producto:', err);
+      alert('Error al registrar producto');
+    }
+  });
+}
 
 }

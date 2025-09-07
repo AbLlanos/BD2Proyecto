@@ -1,7 +1,6 @@
 <app-navbar></app-navbar>
 
 <div class="container1 w-full min-h-screen flex items-center justify-center bg-blue-50 px-4 py-24">
-
   <div class="w-full max-w-4xl bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row">
 
     <!-- Imagen lateral -->
@@ -12,17 +11,14 @@
 
     <!-- Contenido del formulario -->
     <div class="w-full md:w-1/2 p-8 flex flex-col justify-center space-y-6">
-
       <div class="bg-blue-100 p-6 rounded-xl shadow-lg">
 
         <!-- Título -->
         <div class="text-center mb-6">
           <h1 class="text-4xl font-bold text-blue-700">Crear Venta</h1>
-          <p class="text-blue-600 mt-2">Seleccione cliente, empleado y producto</p>
-
+          <p class="text-blue-600 mt-2">Seleccione cliente, empleado y agregue productos</p>
           <div class="mt-6 flex justify-center">
-            <img src="https://cdn-icons-png.flaticon.com/128/263/263142.png" alt="Logo"
-              class="w-28 h-24">
+            <img src="https://cdn-icons-png.flaticon.com/128/263/263142.png" alt="Logo" class="w-28 h-24">
           </div>
         </div>
 
@@ -59,45 +55,98 @@
             }
           </div>
 
-          <!-- Producto -->
+          <!-- Selección y agregado de productos -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 items-end">
+            <div class="md:col-span-2">
+              <label class="block text-sm font-medium text-blue-700">Producto</label>
+              <select #selProduct
+                class="w-full px-4 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <option [ngValue]="null" disabled selected>Seleccione un producto</option>
+                @for (p of productos; track p.id_producto) {
+                <option [value]="p.id_producto">{{ p.nombre }} — Stock: {{ p.cantidad }} — Precio: {{ p.precio }}
+                </option>
+                }
+              </select>
+            </div>
+            <div class="flex gap-2">
+              <button type="button" (click)="agregarProducto(selProduct)"
+                class="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg shadow-sm">Agregar</button>
+            </div>
+          </div>
+
+          <!-- Lista de productos agregados -->
+          <div formArrayName="detalles" class="space-y-3 mt-2">
+            @for (d of detalles.controls; track d; let i = $index) {
+            <div [formGroupName]="i" class="border p-4 rounded-lg bg-white shadow-sm">
+              <div class="flex justify-between items-start">
+                <div>
+                  <p class="font-semibold text-lg">{{ d.get('producto')?.value.nombre }}</p>
+                  <p class="text-xs text-gray-500">Stock: {{ d.get('producto')?.value.cantidad }}</p>
+                </div>
+                <button type="button" (click)="eliminarProducto(i)"
+                  class="text-red-500 text-sm hover:underline">Eliminar</button>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-3">
+                <div>
+                  <label class="block text-sm text-gray-700">Cantidad</label>
+                  <input type="number" formControlName="cantidad" min="1" [max]="d.get('producto')?.value.cantidad"
+                    (input)="calcularTotales()" class="w-full px-3 py-2 border rounded-lg focus:outline-none" />
+                </div>
+
+                <div>
+                  <label class="block text-sm text-gray-700">Precio unitario</label>
+                  <input type="number" formControlName="precio_unitario" (input)="calcularTotales()"
+                    class="w-full px-3 py-2 border rounded-lg focus:outline-none" />
+                </div>
+
+                <div>
+                  <label class="block text-sm text-gray-700">Descuento</label>
+                  <input type="number" formControlName="descuento" (input)="calcularTotales()" min="0"
+                    class="w-full px-3 py-2 border rounded-lg focus:outline-none" />
+                </div>
+              </div>
+
+              <div class="mt-3 flex justify-between text-sm text-gray-700">
+                <div>Subtotal: <strong>{{ d.get('subtotal')?.value | number:'1.2-2' }}</strong></div>
+                <div>IVA: <strong>{{ d.get('iva')?.value | number:'1.2-2' }}</strong></div>
+              </div>
+            </div>
+            }
+          </div>
+
+          <!-- Método de pago -->
           <div>
-            <label class="block text-sm font-medium text-blue-700">Producto</label>
-            <select formControlName="producto"
+            <label class="block text-sm font-medium text-blue-700">Método de pago</label>
+            <select formControlName="metodo_pago"
               class="w-full px-4 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
-              <option [ngValue]="null" disabled selected>Seleccione un producto</option>
-              @for (p of productos; track p.id_producto) {
-              <option [ngValue]="p">{{ p.nombre }}</option>
-              }
+              <option value="efectivo">Efectivo</option>
+              <option value="tarjeta">Tarjeta</option>
+              <option value="transferencia">Transferencia</option>
             </select>
-            @if (ventaForm.get('producto')?.invalid && ventaForm.get('producto')?.touched) {
-            <span class="text-red-500 text-sm">Debe seleccionar un producto</span>
-            }
           </div>
 
-          <!-- Cantidad disponible -->
-          <div>
-            <label class="block text-sm font-medium text-blue-700">Cantidad disponible</label>
-            <input type="number" [value]="productoSeleccionado?.cantidad || 0" disabled
-              class="w-full px-4 py-2 border border-blue-300 rounded-lg bg-gray-100" />
+          <!-- Totales -->
+          <div class="mt-4 p-4 bg-gray-100 rounded-lg">
+            <div class="flex justify-between">
+              <span class="font-medium">Total:</span>
+              <span class="font-semibold">{{ ventaForm.value.total | number:'1.2-2' }}</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="font-medium">IVA total:</span>
+              <span>{{ ventaForm.value.iva_total | number:'1.2-2' }}</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="font-medium">Descuento total:</span>
+              <span>{{ ventaForm.value.descuento_total | number:'1.2-2' }}</span>
+            </div>
           </div>
 
-          <!-- Cantidad a vender -->
-          <div>
-            <label class="block text-sm font-medium text-blue-700">Cantidad a vender</label>
-            <input type="number" formControlName="cantidad" min="1"
-              [max]="productoSeleccionado?.cantidad || 1"
-              class="w-full px-4 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
-            @if (ventaForm.get('cantidad')?.invalid && ventaForm.get('cantidad')?.touched) {
-            <span class="text-red-500 text-sm">Ingrese una cantidad válida</span>
-            }
-          </div>
-
-          <!-- Botón -->
+          <!-- Botón registrar -->
           <button type="submit"
             class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-transform transform hover:scale-105">
             Registrar Venta
           </button>
-
         </form>
       </div>
     </div>
