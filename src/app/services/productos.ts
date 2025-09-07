@@ -37,4 +37,11 @@ export class ProductosServices {
     return this.http.put<Producto>(`${this.API_PRODUCTOS}/actualizar/${id}`, producto, { withCredentials: false });
   }
 
+  //Actulizar stock del producto al comprar
+  actualizarStockProducto(id: string, cantidadVendida: number): Observable<Producto> {
+  return this.http.put<Producto>(`${this.API_PRODUCTOS}/actualizar-stock/${id}`, { 
+    cantidadVendida: cantidadVendida 
+  }, { withCredentials: false });
+}
+
 }

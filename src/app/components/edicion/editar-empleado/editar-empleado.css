@@ -1,4 +1,12 @@
+.container1 {
+    background-color: #7c7c7c;
+    margin-top: 100px;
+    
+}
+
+
 /* === INPUT / TEXTAREA CON BORDE ANIMADO ESTILO CARD === */
+
 .input-card {
   position: relative;
   border-radius: 12px;

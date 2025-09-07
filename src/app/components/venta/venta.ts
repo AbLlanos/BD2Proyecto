@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Navbar } from '../general/navbar/navbar';
 import { Venta } from './ventaInterface';
-import { VentaDetalle } from './ventaDetalleInterface';
 
 @Component({
   selector: 'app-venta',
@@ -21,7 +20,7 @@ import { VentaDetalle } from './ventaDetalleInterface';
 })
 export class VentaComponent implements OnInit {
 
- ventaForm!: FormGroup;
+  ventaForm!: FormGroup;
   productos: Producto[] = [];
   clientes: Cliente[] = [];
   empleados: Empleado[] = [];
@@ -64,23 +63,42 @@ export class VentaComponent implements OnInit {
       return;
     }
 
-    if (producto.cantidad <= 0) {
-      alert('Producto sin stock disponible');
+    // Verificar si el producto ya está en la venta
+    const detalleExistente = this.detalles.controls.find(ctrl => 
+      ctrl.get('producto')?.value.id_producto === producto.id_producto
+    );
+
+    let cantidadSolicitada = 1;
+
+    if (detalleExistente) {
+      cantidadSolicitada = detalleExistente.get('cantidad')?.value + 1;
+    }
+
+    if (cantidadSolicitada > producto.cantidad) {
+      alert(`Stock insuficiente. Solo quedan ${producto.cantidad} unidades`);
       return;
     }
 
-    const detalle = this.fb.group({
-      producto: [producto, Validators.required],
-      cantidad: [1, [Validators.required, Validators.min(1), Validators.max(producto.cantidad)]],
-      precio_unitario: [producto.precio, Validators.required],
-      descuento: [0, [Validators.min(0)]],
-      subtotal: [0],
-      iva: [0]
-    });
+    if (detalleExistente) {
+      // Actualizar cantidad existente
+      detalleExistente.patchValue({
+        cantidad: cantidadSolicitada
+      });
+    } else {
+      // Crear nuevo detalle
+      const detalle = this.fb.group({
+        producto: [producto, Validators.required],
+        cantidad: [1, [Validators.required, Validators.min(1), Validators.max(producto.cantidad)]],
+        precio_unitario: [producto.precio, Validators.required],
+        descuento: [0, [Validators.min(0)]],
+        subtotal: [0],
+        iva: [0]
+      });
 
-    this.detalles.push(detalle);
+      this.detalles.push(detalle);
+    }
+
     this.calcularTotales();
-    
     selProduct.value = '';
   }
 
@@ -120,7 +138,7 @@ export class VentaComponent implements OnInit {
     }, { emitEvent: false });
   }
 
- guardarVenta() {
+  guardarVenta() {
     if (this.ventaForm.invalid || this.detalles.length === 0) {
       this.ventaForm.markAllAsTouched();
       alert('Debe seleccionar cliente, empleado y al menos un producto.');
@@ -143,7 +161,6 @@ export class VentaComponent implements OnInit {
 
     console.log('Venta a enviar (sin detalles):', JSON.stringify(venta, null, 2));
 
-
     this.ventasService.guardarVenta(venta).subscribe({
       next: (ventaGuardada) => {
         console.log('Venta guardada:', ventaGuardada);
@@ -162,7 +179,6 @@ export class VentaComponent implements OnInit {
 
         console.log('Detalles a enviar:', detallesParaGuardar);
 
-        // ✅ LLAMAR AL NUEVO MÉTODO para guardar detalles
         this.guardarDetallesIndividualmente(detallesParaGuardar, ventaGuardada.id_venta!);
       },
       error: (err) => {
@@ -183,7 +199,6 @@ export class VentaComponent implements OnInit {
     }
 
     detalles.forEach(detalle => {
-
       const detalleConVenta = {
         ...detalle,
         id_venta: idVenta
@@ -199,6 +214,8 @@ export class VentaComponent implements OnInit {
           }
           detallesGuardados++;
 
+          // ✅ ACTUALIZAR STOCK DEL PRODUCTO
+          this.actualizarStockProducto(detalle.id_producto, detalle.cantidad);
 
           if (detallesGuardados + errores === detalles.length) {
             if (errores === 0) {
@@ -225,16 +242,31 @@ export class VentaComponent implements OnInit {
     });
   }
 
-  actualizarVentaConDetallesIds(idVenta: string, detallesIds: string[]) {
+  // ✅ NUEVO MÉTODO para actualizar stock
+  actualizarStockProducto(idProducto: string, cantidadVendida: number) {
+    this.productoService.actualizarStockProducto(idProducto, cantidadVendida).subscribe({
+      next: (productoActualizado) => {
+        console.log(`Stock actualizado para producto ${idProducto}:`, productoActualizado);
+        
+        // Actualizar también en la lista local de productos
+        const index = this.productos.findIndex(p => p.id_producto === idProducto);
+        if (index !== -1) {
+          this.productos[index] = productoActualizado;
+        }
+      },
+      error: (err) => {
+        console.error('Error al actualizar stock:', err);
+      }
+    });
+  }
 
+  actualizarVentaConDetallesIds(idVenta: string, detallesIds: string[]) {
     this.ventasService.buscarVentaById(idVenta).subscribe({
       next: (ventaActual) => {
-
         const ventaActualizada = {
           ...ventaActual,
           detalles: detallesIds
         };
-
 
         this.ventasService.editarVenta(idVenta, ventaActualizada).subscribe({
           next: () => {

@@ -24,17 +24,14 @@
                         <p><strong>Proveedor:</strong> {{ getNombreProveedor(producto) }}</p>
                     </div>
 
-                    <!-- Botones -->
+                    <!-- Botones 
                     <div class="boton-container flex gap-2 mt-2">
                         <button type="button" class="boton-comprar" (click)="comprar(producto)"
                             [disabled]="producto.cantidad === 0" [class.agotado]="producto.cantidad === 0">
                             {{ producto.cantidad === 0 ? 'Agotado' : 'Comprar' }}
                         </button>
-
-                        <a [routerLink]="['/editarFormulario', producto.id_producto]" class="boton-editar">
-                            ✏️ Editar
-                        </a>
                     </div>
+                    -->
                 </div>
             </div>
         </div>

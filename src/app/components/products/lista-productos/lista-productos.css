@@ -7,6 +7,13 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.container1 {
+    background-color: #7c7c7c;
+    margin-top: 100px;
+
+}
+
+
 /* Título principal */
 .titulo {
     font-size: 2.8rem;
