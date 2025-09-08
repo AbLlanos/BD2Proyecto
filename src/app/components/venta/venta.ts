@@ -141,8 +141,6 @@ export class VentaComponent implements OnInit {
   guardarVenta() {
     if (this.ventaForm.invalid || this.detalles.length === 0) {
       this.ventaForm.markAllAsTouched();
-      alert('Debe seleccionar cliente, empleado y al menos un producto.');
-      return;
     }
 
     const formValue = this.ventaForm.value;
